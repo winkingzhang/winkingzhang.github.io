@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+# Wenqing's essays
 
-You can use the [editor on GitHub](https://github.com/winkingzhang/winkingzhang/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Wenqing's essays with GitBook look!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## How to Get Started (as a template)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[Fork][1] this repository and add your markdown posts to the `_posts` folder.
 
-```markdown
-Syntax highlighted code block
+### Deploy Locally with Jekyll Serve
 
-# Header 1
-## Header 2
-### Header 3
+This theme can be run locally using Ruby and Gemfiles.
 
-- Bulleted
-- List
+[Testing your GitHub Pages site locally with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) - GitHub
 
-1. Numbered
-2. List
+## How to generate TOC
 
-**Bold** and _Italic_ and `Code` text
+The jekyll-gitbook theme leverages [jekyll-toc][2] to generate the *Contents* for the page.
+The TOC feature is not enabled by default. To use the TOC feature, modify the TOC
+configuration in `_config.yml`:
 
-[Link](url) and ![Image](src)
+```yaml
+toc:
+    enabled: true
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## License
 
-### Jekyll Themes
+This repo is open sourced under the Apache License, Version 2.0.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/winkingzhang/winkingzhang/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+[1]: https://github.com/winkingzhang/winkingzhang.github.io/fork
+[2]: https://github.com/allejo/jekyll-toc
