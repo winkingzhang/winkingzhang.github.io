@@ -6,33 +6,33 @@
         <ul class="summary">
             {% if page.url == "/index.html" or page.url == "/" %}
             <li class="chapter active" data-level="1.1" data-path="{{site.baseurl}}">
-            {% else %}
+                {% else %}
             <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}">
-            {% endif %}
-                <a href="{{site.baseurl | default: '/'}}">
+                {% endif %}
+                <a href="{{ site.baseurl | default: '/' }}">
                     {{ site.title | escape }}
                 </a>
             </li>
 
             <li class="divider"></li>
 
-            {% assign reversed_posts = site.posts | reverse %}
+            {% assign reversed_posts = site.posts %}
 
             {% for post in reversed_posts %}
-                {% if page.url == post.url %}
-                <li class="chapter active" data-level="1.2" data-path="{{site.baseurl}}{{post.url}}">
+            {% if page.url == post.url %}
+            <li class="chapter active" data-level="1.2" data-path="{{site.baseurl}}{{post.url}}">
                 {% else %}
-                <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
+            <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
                 {% endif %}
-                    <a href="{{site.baseurl}}{{post.url}}">
-                        {{ post.title | escape }}
-                    </a>
-                    {% if site.toc.enabled %}
-                        {% if page.url == post.url %}
-                            {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
-                        {% endif %}
-                    {% endif %}
-                </li>
+                <a href=" {{site.baseurl}}{{post.url}} ">
+                    {{ post.title | escape }}
+                </a>
+                {% if site.toc.enabled %}
+                {% if page.url == post.url %}
+                {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
+                {% endif %}
+                {% endif %}
+            </li>
             {% endfor %}
 
             <li class="divider"></li>
@@ -41,6 +41,12 @@
                 <a href="/license.html" class="gitbook-link">
                     License
                 </a>
+            </li>
+
+            <li style="position:fixed; bottom:10px; max-width: 280px;">
+                <img style="width: 200px; padding-left: 15px;"
+                     src="/images/donate.jpg"
+                     alt="donate"/>
             </li>
         </ul>
     </nav>

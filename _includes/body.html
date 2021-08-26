@@ -22,6 +22,16 @@
                             <h1 id="{{ page.id }}">{{ site.title | escape }}</h1>
                         {% endif %}
 
+                        <h6 style="text-align: right">
+                            {% if page.date %}
+                            发表：{{ page.date | date: "%Y年%m月%d日" }} <br />
+                            {% endif %}
+
+                            {% if page.tags.size > 0 %}
+                            Tags: {{ page.tags | join: ", " }}
+                            {% endif %}
+                        </h6>
+
                         {{ content }}
                     </section>
                 </div>

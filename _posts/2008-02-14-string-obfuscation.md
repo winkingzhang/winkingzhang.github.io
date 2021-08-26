@@ -4,6 +4,7 @@ author: Wenqing Zhang
 date: 2008-02-14
 category: CSharp
 layout: post
+tags: C# dotfuscator 算法
 ---
 
 代码混淆工具，像Dotfuscator、Xenocode Postbuild等，都有重要功能就是字符串混淆，说起来很轻巧很简单，那么它到底是什么呢，如何工作的呢？
