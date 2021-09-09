@@ -2,6 +2,9 @@ _site/
 _draft/
 .jekyll-cache/
 
+.bundle/
+vendor/
+
 # Logs
 logs
 *.log
