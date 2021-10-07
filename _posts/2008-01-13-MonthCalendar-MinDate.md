@@ -1,5 +1,5 @@
 ---
-title: 为什么 MonthCalendar.MinDate 是"01/01/1753"?
+title: 为什么 MonthCalendar.MinDate 是 01/01/1753 ?
 author: Wenqing Zhang
 date: 2008-01-13
 category: CSharp
