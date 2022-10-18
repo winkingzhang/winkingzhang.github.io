@@ -1,0 +1,7 @@
+main:
+  - title: "个人简历"
+    url: /resume
+  - title: "博客文章"
+    url: /blogs
+  - title: "关于"
+    url: /about
