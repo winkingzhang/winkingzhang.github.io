@@ -1,13 +1,16 @@
 ---
 title:  "Partial Content(206) 那些事"
 header:
-  teaser: "/assets/images/teaser.jpg"
+  teaser: "/assets/images/teaser-2.jpg"
 categories:
   - web
 tags:
   - http
   - PartialContent
   - CSharp
+excerpt: >
+  这是来自客户的一个真实而奇怪的问题，突然某一天他们的 Google Chome 和 Edge 访问网站时，
+  许多图片都离奇消失了，但是又不是完全消失；支持人员一番尝试发现……
 ---
 
 ## 前言

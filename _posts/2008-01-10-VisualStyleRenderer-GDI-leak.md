@@ -1,7 +1,7 @@
 ---
 title:  "VisualStyleRenderer造成GDI泄漏分析"
 header:
-  teaser: "/assets/images/teaser.jpg"
+  teaser: "/assets/images/teaser-2.jpg"
 categories:
   - CSharp
 tags:

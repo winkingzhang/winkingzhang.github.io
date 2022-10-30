@@ -1,7 +1,7 @@
 ---
 title:  "Nodejs使用并信任自签名SSL证书"
 header:
-  teaser: "/assets/images/teaser.jpg"
+  teaser: "/assets/images/teaser-2.jpg"
 categories:
   - nodejs
 tags:

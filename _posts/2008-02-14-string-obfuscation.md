@@ -1,7 +1,7 @@
 ---
 title:  "Dotfuscator中字符串混淆算法"
 header:
-  teaser: "/assets/images/teaser.jpg"
+  teaser: "/assets/images/teaser-2.jpg"
 categories:
   - CSharp
 tags:

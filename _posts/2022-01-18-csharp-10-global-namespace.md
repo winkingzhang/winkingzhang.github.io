@@ -1,12 +1,16 @@
 ---
 title:  "C# 10 新功能 - 全局命名空间和隐式导入"
 header:
-  teaser: "/assets/images/teaser.jpg"
+  teaser: "/assets/images/teaser-1.jpg"
 categories:
   - CSharp
 tags:
   - CSharp
   - namespace
+excerpt: >
+  C# 10 引入了一些 namespace 新特性。
+  1) `global using` ，这意味着开发人员可以全局导入 namespace 而不必逐文件添加了;
+  2) 对于新的 .NET 6 项目，支持隐式导入;
 ---
 
 命名空间（namespace）可以说是C#（甚至整个.NET生态）中最早确定的概念了， 一直以来，所有的文档和教科书都会说：

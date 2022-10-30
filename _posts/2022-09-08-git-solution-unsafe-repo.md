@@ -6,6 +6,9 @@ categories:
   - git
 tags:
   - git
+excerpt: >
+  前段时间不小心删掉了自己的一个 github repo，找了很久在一个备用U盘里发现有备份，
+  开心的从U盘备份拷到机器上准备推到github上，然而，习惯性的运行 `git status` 时却收到了 unsafe repository 的错误
 ---
 
 前段时间不小心删掉了自己的一个 github repo，找了很久在一个备用U盘里发现有备份，
