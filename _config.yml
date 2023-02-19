@@ -147,6 +147,7 @@ exclude:
   - .bundle
   - .jekyll-assets-cache
   - .sass-cache
+  - .idea
   - assets/js/plugins
   - assets/js/_main.js
   - assets/js/vendor
@@ -191,6 +192,42 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+
+
+# Collections
+collections:
+  books:
+    output: true
+    permalink: /:collection/:path
+
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      classes: wide
+      toc: false
+      author_profile: true
+      read_time: true
+      comments: # true
+      share: true
+      related: true
+  # _books
+  - scope:
+      path: ""
+      type: books
+    values:
+      layout: single
+      classes: wide
+      toc: false
+      read_time: true
+      comments: # true
+      share: true
+      author_profile: false
 
 
 # Sass/SCSS
@@ -258,20 +295,3 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-
-
-# Defaults
-defaults:
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      classes: wide
-      toc: false
-      author_profile: true
-      read_time: true
-      comments: # true
-      share: true
-      related: true

@@ -3,5 +3,41 @@ main:
     url: /resume
   - title: "博客文章"
     url: /blogs
+  - title: "翻译文稿"
+    url: /books
   - title: "关于"
     url: /about
+
+# Book Mastering Minimal APIs in ASP.NET Core
+minimal_apis:
+  - title: "扉页"
+    url: /books/minimal-apis/
+  - title: "前言"
+    url: /books/minimal-apis/preface
+  - title: "第一部分，介绍"
+    children:
+      - title: "Minimal APIs 简介"
+        url: /books/minimal-apis/chapter-01
+      - title: "探索 Minimal APIs 及其优点"
+        url: /books/minimal-apis/chapter-02
+      - title: "使用 Minimal APIs"
+        url: /books/minimal-apis/chapter-03
+  - title: "第二部分，.NET 6 新功能"
+    children:
+      - title: "Minimal APIs 项目中的依赖注入"
+        url: /books/minimal-apis/chapter-04
+      - title: "使用日志记录识别错误"
+        url: /books/minimal-apis/chapter-05
+      - title: "探索验证和映射"
+        url: /books/minimal-apis/chapter-06
+      - title: "与数据访问层的集成"
+        url: /books/minimal-apis/chapter-07
+  - title: "第三部分，高级开发和微服务"
+    children:
+      - title: "添加身份验证和授权"
+        url: /books/minimal-apis/chapter-08
+      - title: "利用全球化和本地化"
+        url: /books/minimal-apis/chapter-09
+      - title: "评估性能并对其进行基准测试"
+        url: /books/minimal-apis/chapter-10
+
