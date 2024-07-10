@@ -19,12 +19,18 @@
   </div>
 
   <div class="page__footer-copyright">
-    &copy; {{ site.time | date: '%Y' }}, Zhang Wenqing. &nbsp;&nbsp; {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }}
+    &copy; {{ site.time | date: '%Y' }}, Zhang Wenqing.
+    {% if site.footer.beian %}
+    <a href="{{ site.footer.beian.url }}" target="_blank" rel="nofollow">{{ site.footer.beian.label }}</a><br />
+    {% else %}
+    &nbsp;&nbsp;
+    {% endif %}
+    {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }}
     <a href="{{ site.url }}" rel="nofollow">Zhang Wenqing</a> 和
-    <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+    <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" target="_blank" rel="nofollow">Minimal Mistakes</a>.
   </div>
 
-  <div class="page__footer-copyright">
+  <div class="page__footer-copyright" style="font-size: 9px">
     <a href='https://www.symptoma.es/'>symptom checker español</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=4bb317d50d7bc8f56516834df643f4cd3f8bbfe7'></script>
     <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/991367/t/5"></script>
   </div>
