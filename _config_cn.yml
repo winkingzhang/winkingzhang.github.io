@@ -1,0 +1,31 @@
+url                      : "https://www.zhangwenqing.cn"
+
+# Analytics
+analytics:
+  provider               : baidu # false (default), "baidu", "google", "google-universal", "google-gtag", "custom"
+  baidu:
+    tracking_id          : 360d9d5c4f084c712caf2481851796d9
+
+# Site Author
+author:
+  name             : "张文清"
+  avatar           : /assets/images/avatar.jpg # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "全栈开发，技术极客"
+  location         : "中国·西安"
+  email            :
+  links:
+    - label: "winking.zhang@live.com"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:winking.zhang@live.com"
+    - label: "blogs.zhangwenqing.org"
+      icon: "fas fa-fw fa-link"
+      url: "https://www.zhangwenqing.cn"
+    - label: "@winkingzhang"
+      icon: "fab fa-fw fa-weixin"
+      url: "weixin://winkingzhang"
+    - label: "@winkingzhang"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/winkingzhang"
+    - label: "winkingzhang"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/winkingzhang"
