@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+gem "jekyll"
+gem "minimal-mistakes-jekyll"
+
 # To update to the latest github dependencies run: `bundle update`
 # To list current versions: `bundle exec github-pages versions`
 # Check github versions: https://pages.github.com/versions/
@@ -12,8 +15,6 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
   gem 'jekyll-sitemap'
 end
-
-gem "minimal-mistakes-jekyll"
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
