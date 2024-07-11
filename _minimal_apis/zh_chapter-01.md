@@ -126,14 +126,14 @@ $ dotnet --list-sdks
 按照以下步骤在 Visual Studio 2022 中创建新项目：
 
 1. 打开 Visual Studio 2022，在主屏幕上，单击创建新项目：
-![Figure_1.01_B17902.jpg](/books/minimal-apis/image/Figure_1.01_B17902.jpg)
+![Figure_1.01_B17902.jpg](/assets/images/minimal-apis/Figure_1.01_B17902.jpg)
 2. 在下一个屏幕上，在窗口顶部的文本框中编写 API，然后选择名为 ASP.NET Core Web API 的模板：
-![Figure_1.02_B17902.jpg](/books/minimal-apis/image/Figure_1.02_B17902.jpg)
+![Figure_1.02_B17902.jpg](/assets/images/minimal-apis/Figure_1.02_B17902.jpg)
 3. 接下来，在”配置新项目“屏幕上，插入新项目的名称，并选择新解决方案的根文件夹：
-![Figure_1.03_B17902.jpg](/books/minimal-apis/image/Figure_1.03_B17902.jpg)
+![Figure_1.03_B17902.jpg](/assets/images/minimal-apis/Figure_1.03_B17902.jpg)
 4. 在以下”其他信息“屏幕上，确保从”框架“下拉列表中选择”.NET 6.0（长期支持）”。
 最重要的是，取消选中使用控制器（取消选中以使用 Minimal APIs）选项。
-![Figure_1.04_B17902.jpg](/books/minimal-apis/image/Figure_1.04_B17902.jpg)
+![Figure_1.04_B17902.jpg](/assets/images/minimal-apis/Figure_1.04_B17902.jpg)
 5. 单击”创建“，几秒钟后，您将看到新的 `Minimal APIs` 项目的代码。
 
 现在我们将展示如何使用 Visual Studio Code 和 .NET CLI 创建相同的项目。

@@ -56,7 +56,7 @@ Swagger 是一种基于 OpenAPI 规范的工具，允许您使用 Web 应用程�
 
 然后我们了解到，正如我们在 .NET 世界中所知，Swagger 只不过是为所有公开基于 Web API 的应用程序定义的一组规范：
 
-![Figure_3.1 - Visual Studio scaffold](/books/minimal-apis/image/Figure_3.1_B17902.jpg)
+![Figure_3.1 - Visual Studio scaffold](/assets/images/minimal-apis/Figure_3.1_B17902.jpg)
 
 通过选择 "_启用 OpenAPI 支持_"，Visual Studio 会添加一个名为 `Swashbuckle.AspNetCore` 的 NuGet 包，并自动在 **Program.cs** 文件中对其进行配置。
 
@@ -177,7 +177,7 @@ if (app.Environment.IsDevelopment())
 `UseSwaggerUI()` 方法明确使用 OpenAPI 格式并自动配置将 UI 和描述 API 的 JSON 文件放置在何处。
 
 这是现代桌面浏览器显示结果：
-![Figure_3.2 - The Swagger UI](/books/minimal-apis/image/Figure_3.2_B17902.jpg)
+![Figure_3.2 - The Swagger UI](/assets/images/minimal-apis/Figure_3.2_B17902.jpg)
 
 我们立即可以看到 OpenAPI 契约信息已经放在了 `/swagger/v1/swagger.json` 路径下。
 
@@ -236,7 +236,7 @@ app.MapPost("/", (ResponseData data) => Results.Ok(data))
 
 如下这是 Swagger 的图形结果；正如我之前预期的那样，标签和操作 ID 不在 Web 客户端显示：
 
-![Figure_3.3 - Swagger UI methods](/books/minimal-apis/image/Figure_3.3_B17902.jpg)
+![Figure_3.3 - Swagger UI methods](/assets/images/minimal-apis/Figure_3.3_B17902.jpg)
 
 正因如此。从另一个角度来看，包含端点描述将是非常有用的。
 当然实现起来非常简单：只需在方法中插入 C# 注释（只需在方法中插入三个斜杠 ///）。
@@ -276,7 +276,7 @@ Swagger 不仅仅是我们习惯看到的 GUI。实际上，Swagger 是支持 Op
 
 在前面的 Swagger UI 代码片段中，Swagger 提供了涉及的对象的示意图，包括进入各个端点的入站和从它们出站的出站。
 
-![Figure_3.4 - Input and output data schema](/books/minimal-apis/image/Figure_3.4_B17902.jpg)
+![Figure_3.4 - Input and output data schema](/assets/images/minimal-apis/Figure_3.4_B17902.jpg)
 
 在第六章中，我们将学习如何处理这些对象以及如何验证和定义它们，探索验证和映射。
 
@@ -348,7 +348,7 @@ builder.Services.AddSwaggerGen(c =>
 
 以下是用户界面看到的结果；在端点中，只有对于特定的操作 ID，我们将有一个新的必填头部，该头部带有一个默认参数，在开发中不需要手动插入：
 
-![Figure 3.5 – API key section](/books/minimal-apis/image/Figure_3.5_B17902.jpg)
+![Figure 3.5 – API key section](/assets/images/minimal-apis/Figure_3.5_B17902.jpg)
 
 此案例研究在我们需要设置 API key 且不希望在每次调用时都插入它时，对我们帮助很大。
 
@@ -376,11 +376,11 @@ CORS（跨源资源共享）是一种安全机制，通过该机制，如果HTTP
 
 最常见的场景是，SPA发布在与托管于 Minimal API 服务的不同Web地址上的Web服务器上。
 
-![Figure 3.6 – SPA and minimal API](/books/minimal-apis/image/Figure_3.6_B17902.jpg)
+![Figure 3.6 – SPA and minimal API](/assets/images/minimal-apis/Figure_3.6_B17902.jpg)
 
 类似的场景是微服务之间需要相互通信，因为每个微服务将驻留在与其他服务不同的特定网络地址上。
 
-![Figure 3.7 – Microservices and minimal APIs](/books/minimal-apis/image/Figure_3.7_B17902.jpg)
+![Figure 3.7 – Microservices and minimal APIs](/assets/images/minimal-apis/Figure_3.7_B17902.jpg)
 
 在所有这些情况下，显然都会遇到 CORS 问题。
 
@@ -395,19 +395,19 @@ The HTTP call is executed and it goes all the way to the backend code, which exe
 
 The response, with the correct data inside, is blocked by the browser. That’s why when we execute a call with Postman, Fiddler, or any HTTP client, the response reaches us correctly.
 
-![Figure 3.8 – CORS flow](/books/minimal-apis/image/Figure_3.8_B17902.jpg)
+![Figure 3.8 – CORS flow](/assets/images/minimal-apis/Figure_3.8_B17902.jpg)
 
 In the following figure, we can see that the browser makes the first call with the OPTIONS method, to which the backend responds correctly with a 204 status code:
 
-![Figure 3.9 – First request for the CORS call (204 No Content result)](/books/minimal-apis/image/Figure_3.9_B17902.jpg)
+![Figure 3.9 – First request for the CORS call (204 No Content result)](/assets/images/minimal-apis/Figure_3.9_B17902.jpg)
 
 In the second call that the browser makes, an error occurs; the strict-origin-when-cross-origin value is shown in Referrer Policy, which indicates the refusal by the browser to accept data from the backend:
 
-![Figure 3.10 – Second request for the CORS call (blocked by the browser)](/books/minimal-apis/image/Figure_3.10_B17902.jpg)
+![Figure 3.10 – Second request for the CORS call (blocked by the browser)](/assets/images/minimal-apis/Figure_3.10_B17902.jpg)
 
 When CORS is enabled, in the response to the OPTIONS method call, three headers are inserted with the characteristics that the backend is willing to respect:
 
-![Figure 3.11 – Request for CORS call (with CORS enabled)](/books/minimal-apis/image/Figure_3.11_B17902.jpg)
+![Figure 3.11 – Request for CORS call (with CORS enabled)](/assets/images/minimal-apis/Figure_3.11_B17902.jpg)
 
 In this case, we can see that three headers are added that define Access-Control-Allow-Headers, Access-Control-Allow-Methods, and Access-Control-Allow-Origin.
 
@@ -902,7 +902,7 @@ In the first section, we need to insert the keys and values or JSON objects that
 
 In the Connection strings section, you can insert the connection strings that are usually inserted in the appsettings.json file. In this section, in addition to the textual string, it is necessary to set the connection type, as we saw in the Configuration in .NET 6 section.
 
-![Figure 3.12 – Azure App Service Application settings](/books/minimal-apis/image/Figure_3.12_B17902.jpg)
+![Figure 3.12 – Azure App Service Application settings](/assets/images/minimal-apis/Figure_3.12_B17902.jpg)
 
 ##### Inserting an object
 
@@ -1037,7 +1037,7 @@ Since what we’re describing is a key functionality of the application, we thin
 
 .NET provides the same tool for minimal APIs that we can implement in traditional development: a Developer Exception Page. This is nothing but middleware that reports the error in plain text format. This middleware can’t be removed from the ASP.NET pipeline and works exclusively in the development environment (https://docs.microsoft.com/aspnet/core/fundamentals/error-handling).
 
-![Figure 3.13 – Minimal APIs pipeline, ExceptionHandler](/books/minimal-apis/image/Figure_3.13_B17902.jpg)
+![Figure 3.13 – Minimal APIs pipeline, ExceptionHandler](/assets/images/minimal-apis/Figure_3.13_B17902.jpg)
 
 If exceptions are raised within our code, the only way to catch them in the application layer is through middleware that is activated before sending the response to the client.
 

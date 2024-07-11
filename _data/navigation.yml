@@ -1,7 +1,7 @@
 main:
   - title: "个人简历"
     url: /resume
-  - title: "博客文章"
+  - title: "闲话文章"
     url: /blogs
   - title: "翻译文稿"
     url: /books

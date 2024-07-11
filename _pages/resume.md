@@ -1,6 +1,5 @@
 ---
 title: "个人简历"
-excerpt: "个人简历，包括但不限于曾经的大大小小项目"
 sitemap: false
 permalink: /resume
 layout: splash
