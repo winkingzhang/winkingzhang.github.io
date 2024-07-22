@@ -11,11 +11,13 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 #theme                  : "minimal-mistakes-jekyll"
-remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : sunrise # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+remote_theme            : "mmistakes/minimal-mistakes"
+minimal_mistakes_skin   : sunrise # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+enable_copy_code_button : true
 
 # Site Settings
 locale                   : zh
+date_format              : "%Y年%-m月%-d日"
 title                    : "文清闲话"
 title_separator          : "-"
 subtitle                 : "闲暇之余的随笔，技术文章。" # site tagline that appears below site title in masthead
@@ -192,6 +194,9 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
 
 
 # Collections
@@ -215,6 +220,7 @@ defaults:
       classes: wide
       toc: false
       author_profile: true
+      show_date: true
       read_time: true
       comments: # true
       share: true
@@ -298,4 +304,4 @@ compress_html:
   clippings: all
   blanklines: true
   ignore:
-    envs: development
+    envs: all
