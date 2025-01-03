@@ -12,11 +12,13 @@ sidebar:
 
 ## 使用 Minimal APIs
 
-在本章中，我们将尝试采用 .NET 早期版本的中提供的一些高级开发技术，我们将其细分为四个相互独立的主题。
-我们将介绍前端接口和配置管理的生产力话题和最佳实践，还有每个开发人员或迟或早遇到我们在本章中描述的问题，
-例如程序员必须编写的 API 文档； 必须满足 API 和前端 JavaScript 通信；必须处理错误并尝试修复它们，必须根据参数配置应用程序。
+在本章中，我们将尝试应用在早期版本的 .NET 中可用的一些高级开发技术。
+我们将涉及四个相互独立的常见主题，涵盖生产力主题以及前端接口和配置管理的最佳实践。
 
-因此本章中涉及的主题概述如下：
+每个开发人员迟早都会遇到我们在本章中描述的问题。
+程序员需要为 API 编写文档，使 API 与 JavaScript 前端进行通信，处理错误并尝试修复它们，以及根据参数配置应用程序。
+
+本章将涉及的主题如下：
 - 探索 Swagger
 - 支持 CORS
 - 使用全局 API 设置
@@ -25,11 +27,13 @@ sidebar:
 
 ## 技术要求
 
-如前几章所述，我们需要 .NET 6 开发框架； 此外还需要使用 .NET 工具来运行内存中的 Web 服务器。
+如前几章所述，需要有可用的 .NET 6 开发框架；还需要使用 .NET 工具来运行内存中的 Web 服务器。
 
-为了验证 **跨源资源共享 (CORS)** 的功能，还需要有一个与我们托管 API 的地址不同的 HTTP 地址上的前端应用程序。
-为了测试我们将在本章中提到的 CORS 示例，我们需要一个简易的内存中的 Web 服务器，以托管一个简单的静态 HTML 页面。
-因此，我们将使用 `LiveReloadServer` 来托管网页（HTML 和 JavaScript），您可以使用以下命令将其安装为 .NET 工具：
+为了验证 **跨源资源共享 (CORS)** 的功能，我们还需要有一个与我们托管 API 的地址不同的 HTTP 地址上的前端应用程序。
+
+为了测试本章中提到的 CORS 示例，我们将利用内存中的 Web 服务器，它将允许我们托管一个简单的静态 HTML 页面。
+
+为此，我们将使用 `LiveReloadServer` 来托管网页（HTML 和 JavaScript），您可以使用以下命令将其安装为 .NET 工具：
 ```bash
 $ dotnet tool install -g LiveReloadServer
 ```
@@ -39,28 +43,30 @@ $ dotnet tool install -g LiveReloadServer
 
 ## 探索 Swagger
 
-Swagger 在很大程度上进入了 .NET 开发人员的生活； 它已出现在多个版本的 Visual Studio 的项目架上。
+Swagger 在很大程度上进入了 .NET 开发人员的生活； 它一直存在于多个版本的 Visual Studio 的项目架上。
 
-Swagger 是一种基于 OpenAPI 规范的工具，允许您使用 Web 应用程序文档化 API。 根据
-[https://oai.github.io/Documentation/introduction.xhtml](https://oai.github.io/Documentation/introduction.xhtml) 提供的官方文档描述如下：
+Swagger 是一个基于 OpenAPI 规范的工具，允许你使用 Web 应用程序为 API 编写文档。根据官方文档
+[https://oai.github.io/Documentation/introduction.xhtml](https://oai.github.io/Documentation/introduction.xhtml)：
 
-> OpenAPI 规范允许描述可通过 HTTP 或类 HTTP 协议访问的远程 API。
+> OpenAPI 规范允许描述通过 HTTP 或类似 HTTP 的协议可访问的远程 API。
 > 
-> API 定义了两个软件之间允许的交互，就像用户界面定义了用户可以与程序交互的方式一样。
+> API 定义了两个软件之间允许的交互，就像用户界面定义了用户与程序交互的方式一样。
 > 
-> API 由一系列可供调用的方法（发出的请求）、它们的参数、返回值和它们需要的任何数据格式（以及其他内容）组成。 
-> 这相当于用户与手机应用程序的交互仅限于应用程序用户界面中的按钮、滑块和文本框。 
+> API 由可能调用的方法（发出的请求）、它们的参数、返回值以及它们所需的任何数据格式（以及其他内容）组成。
+> 这类似于用户与移动应用程序的交互仅限于应用程序用户界面中的按钮、滑块和文本框。 
 
 
-### Visual Studio 脚手架中的 Swagger
+### Visual Studio 项目模板中的 Swagger
 
-然后我们了解到，正如我们在 .NET 世界中所知，Swagger 只不过是为所有公开基于 Web API 的应用程序定义的一组规范：
+我们了解到，在 .NET 世界中，我们所熟知的 Swagger 只不过是为所有公开基于 Web 的 API 的应用程序定义的一组规范：
 
 ![Figure_3.1 - Visual Studio scaffold](/assets/images/minimal-apis/Figure_3.1_B17902.jpg)
 
-通过选择 "_启用 OpenAPI 支持_"，Visual Studio 会添加一个名为 `Swashbuckle.AspNetCore` 的 NuGet 包，并自动在 **Program.cs** 文件中对其进行配置。
+通过选择 " _启用 OpenAPI 支持_ "，Visual Studio 会添加一个名为 `Swashbuckle.AspNetCore` 的 NuGet 包，
+并自动在 **Program.cs** 文件中对其进行配置。
 
-我们展示了新项目中添加的几行代码。 有了这一段配置，Web 应用程序只在开发环境中启用，这允许开发人员直接测试 API，而无需生成客户端或使用应用程序外部的工具：
+我们展示了在新项目中添加的几行代码。通过这些少量信息，仅在开发环境中启用了一个 Web 应用程序，
+这允许开发人员在不生成客户端或使用应用程序外部工具的情况下测试 API：
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -78,23 +84,23 @@ if (app.Environment.IsDevelopment())
 }
 ```
 
-Swagger 生成的可视化部分大大提高了生产力，并允许开发人员与将与应用程序交互的人员共享信息，无论是前端应用程序还是机器应用程序。
+Swagger 生成的可视化部分大大提高了生产力，并允许开发人员与将与应用程序交互的人员（无论是前端应用程序还是机器应用程序）共享信息。
 
 > 注意
 > 
-> 再次提醒，强烈建议不要在生产环境中启用 Swagger，因为敏感信息可能会公开暴露在 Web 或应用程序所在的网络上。
+> 再次提醒，强烈建议不要在生产环境中启用 Swagger，因为敏感信息可能会在网络或应用程序所在的网络上公开。
 
-我们已经了解了如何将 Swagger 引入我们的 API 应用程序； 此功能允许我们文档化我们的 API，并允许用户生成客户端来调用我们的应用程序。
-让我们看看我们可以使用哪些选项来快速将应用程序与 OpenAPI 描述的 API 连接起来。
+我们已经了解了如何将 Swagger 引入我们的 API 应用程序；此功能允许我们为 API 编写文档，并允许用户生成调用我们应用程序的客户端。
+让我们看看有哪些选项可以快速将应用程序与使用 OpenAPI 描述的 API 进行接口。
 
-### OpenAPI Generator
+### OpenAPI 生成器
 
 使用 Swagger，尤其是使用 OpenAPI 标准，您可以自动生成客户端以连接到 Web 应用程序。 
 可以为多种语言生成客户端，也可以为开发工具生成客户端。 我们知道编写客户端访问 Web API 是多么繁琐和重复。 
 Open API Generator 帮助我们自动生成代码，检查 Swagger 和 OpenAPI 制作的 API 文档，并自动生成与 API 接口的代码。 
 简单、容易，最重要的是，快速。
 
-npm 包 `@openapitools/openapi-generator-cli` 是一个非常著名的 OpenAPI Generator 的包装器，您可以在 https://openapi-generator.tech/ 找到它。
+npm 包 `@openapitools/openapi-generator-cli` 是一个非常著名的 OpenAPI 生成器的工具包，您可以在 https://openapi-generator.tech/ 找到它。
 
 使用此工具，您可以为各种编程语言生成客户端以及 JMeter 和 K6 等负载测试工具。
 
@@ -112,20 +118,20 @@ docker run --rm \
 
 现在，让我们详细了解如何在 .NET 6 项目中使用 Swagger，并应用到 `Minimal API` 中。
 
-### Swagger in minimal APIs
+### Minimal APIs 中的 Swagger
 
 在 ASP.NET Web API 中，如以下代码片段所示，我们看到一个方法记录在 C# 代码注释中，带有三重斜杠 (///)。
 
-文档部分用于向 API 描述添加更多信息。 此外，ProducesResponseType 特性帮助 Swagger 识别客户端必须处理的可能代码作为方法调用的结果：
+文档部分用于向 API 描述添加更多信息。 此外，`ProducesResponseType` 特性帮助 Swagger 识别客户端必须处理的可能代码作为方法调用的结果：
 
 ```csharp
 /// <summary>
-/// Creates a Contact.
+/// 创建一个联系人。
 /// </summary>
 /// <param name="contact"></param>
-/// <returns>A newly created Contact</returns>
-/// <response code="201">Returns the newly created contact</response>
-/// <response code="400">If the contact is null</response>
+/// <returns>一个新创建的联系人</returns>
+/// <response code="201">返回新创建的联系人</response>
+/// <response code="400">如果联系人是 null</response>
 [HttpPost]
 [ProducesResponseType(StatusCodes.Status201Created)]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -137,10 +143,10 @@ public async Task<IActionResult> Create(Contact contactItem)
 }
 ```
 
-Swagger，除了对单个方法的注释之外，注释文档还指示 Swagger 向那些随后必须使用 API 应用程序的人提供更多信息。 
-那些需要接口的人总是欢迎对参数方法的描述； 但不幸的是，Minimal API 中不支持此功能。
+除了单个方法上的注释外，Swagger 还由语言文档指导，为那些必须使用 API 应用程序的人提供进一步的信息。
+方法参数的描述对于必须对接接口的人来说总是受欢迎的；不幸的是，在 Minimal API 中无法利用此功能。
 
-让我们逐步看看如何在单个方法上开始使用 Swagger：
+让我们按顺序看看如何开始在单个方法上使用 Swagger：
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -171,19 +177,21 @@ if (app.Environment.IsDevelopment())
 }
 ```
 
-在这第一个示例中，我们配置了 Swagger 和常用的 Swagger 信息。 我们还包含了丰富 Swagger UI 的附加信息。 
-这里唯一的必填信息是标题，而版本、联系方式、描述、许可证和服务条款是可选的。
+在第一个示例中，我们配置了 Swagger 和一般的 Swagger 信息。我们包含了丰富 Swagger UI 的附加信息。
+唯一必需的信息是标题，而版本、联系人、描述、许可证和服务条款是可选的。
 
-`UseSwaggerUI()` 方法明确使用 OpenAPI 格式并自动配置将 UI 和描述 API 的 JSON 文件放置在何处。
+`UseSwaggerUI()` 方法自动配置放置 UI 和使用 OpenAPI 格式描述 API 的 JSON 文件的位置。
 
 这是现代桌面浏览器显示结果：
 ![Figure_3.2 - The Swagger UI](/assets/images/minimal-apis/Figure_3.2_B17902.jpg)
 
 我们立即可以看到 OpenAPI 契约信息已经放在了 `/swagger/v1/swagger.json` 路径下。
 
-联系信息已自动展示，但没有下面任何接口操作的文档，因为我们尚未开发任何接口操作。 API 应该有版本控制吗？是的，在右上角有个下拉框，我们可以选择具体的版本，已查看其可用的操作。
+联系信息已自动展示，但没有下面任何接口操作的文档，因为我们尚未开发任何接口操作。
+API 应该有版本控制吗？是的，在右上角有个下拉框，我们可以选择具体的版本，已查看其可用的操作。
 
-我们可以自定义 Swagger URL 并将 JSON 文档对应到新路径；这里重要的是使用 SwaggerEndpoint 来实现，类似如下：
+我们可以自定义 Swagger URL 并将 JSON 文档对应到新路径；
+这里重要的是使用 `SwaggerEndpoint` 方法来重写配置，类似如下：
 ```csharp
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", 
     $"{builder.Environment.ApplicationName} v1"));
@@ -193,7 +201,8 @@ app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json",
 
 配置和定义 `RouteHandlerBuilder` 非常重要，因为它允许我们描述在代码中编写的端点的各种属性。
 
-Swagger 的 UI 应当尽可能的丰富，因此，我们必须尽可能多的描述 Minimal API 所允许我们可以指定或者修改的内容。 但遗憾的是，并非所有 ASP.NET Web API 中的功能都可用。
+Swagger 的 UI 应当尽可能的丰富，因此，我们必须尽可能多的描述 Minimal API 所允许我们可以指定或者修改的内容。
+但遗憾的是，并非所有 ASP.NET Web API 中的功能都可用。
 
 #### Minimal APIs 中的版本控制
 
@@ -203,11 +212,13 @@ Minimal APIs 中的版本控制在当前框架中并不能处理；也就是说�
 #### Swagger 功能
 
 我们刚刚了解到，并非所有功能都可以在 Swagger 中使用；现在让我们探索一下当前可用的方法。
-为了描述端点可能的输出信息，我们需要调用附加在处理程序之后调用的一些函数，例如我们现在要探讨的 `Produces` 或 `WithTags` 函数。
+为了描述端点可能的输出信息，我们需要调用附加在处理程序之后调用的一些函数，
+例如我们现在要探讨的 `Produces` 或 `WithTags` 函数。
 
 `Produces` 函数对所有返回给我们已知的客户端的端点的各种可能响应做装饰。
-我们可以为操作添加名称（`OperationId`）；此信息不会出现在 Swagger 屏幕中，但它将是客户端创建调用端点的方法的标识名称。 
-OperationId 是处理程序提供的操作的唯一名称。
+我们可以为操作添加名称（`OperationId`）；
+此信息不会出现在 Swagger 屏幕中，但它将是客户端创建调用端点的方法的标识名称。 
+`OperationId` 是处理程序提供的操作的唯一名称。
 
 要从 API 描述中排除某个端点，您需要调用 `ExcludeFromDescription()`。
 此函数很少使用，但在一些特定情况和场景非常有用，例如端点是底层或内部接口，但又不想暴露给前端开发人员。
@@ -234,7 +245,7 @@ app.MapPost("/", (ResponseData data) => Results.Ok(data))
    .Accepts<ResponseData>(MediaTypeNames.Application.Json);
 ```
 
-如下这是 Swagger 的图形结果；正如我之前预期的那样，标签和操作 ID 不在 Web 客户端显示：
+如下这是 Swagger 的可视化结果；正如我之前预期的那样，标签和 `OperationId` 不在 Web 客户端显示：
 
 ![Figure_3.3 - Swagger UI methods](/assets/images/minimal-apis/Figure_3.3_B17902.jpg)
 
@@ -242,7 +253,8 @@ app.MapPost("/", (ResponseData data) => Results.Ok(data))
 当然实现起来非常简单：只需在方法中插入 C# 注释（只需在方法中插入三个斜杠 ///）。
 Minimal API 没有像我们在基于 Web 的控制器中所惯用的方法，因为它们不受原生支持的。
 
-Swagger 不仅仅是我们习惯看到的 GUI。实际上，Swagger 是支持 OpenAPI 规范的 JSON 文件，较新版本为3.1.0。
+Swagger 不仅仅是我们习惯看到的 GUI。
+实际上，Swagger 还支持 OpenAPI 规范的 JSON 文件，较新版本为3.1.0。
 
 在下面的代码片段中，我们展示了包含我们在 API 中插入的第一个端点的描述的部分。
 我们可以推断出标签和操作 ID；这些信息将由那些与 API 交互的人员使用：
@@ -280,12 +292,12 @@ Swagger 不仅仅是我们习惯看到的 GUI。实际上，Swagger 是支持 Op
 
 在第六章中，我们将学习如何处理这些对象以及如何验证和定义它们，探索验证和映射。
 
-#### Swagger OperationFilter
+#### Swagger 操作过滤器
 
 操作过滤器允许您为 Swagger 显示的所有操作添加行为。
 在下面的示例中，我们将向您展示如何为特定调用添加一个 HTTP 头部，通过 `OperationId` 过滤它。
 
-当您去定义一个操作过滤器时，您也可以基于路由、标签和操作 ID 设置过滤器：
+当您去定义一个操作过滤器时，您也可以基于路由、标签和 `OperationId` 设置过滤器：
 
 ```csharp
 public class CorrelationIdOperationFilter : IOperationFilter
@@ -326,7 +338,7 @@ public class CorrelationIdOperationFilter : IOperationFilter
 }
 ```
 
-要定义操作过滤器，必须实现 IOperationFilter 接口。
+要定义操作过滤器，必须实现 `IOperationFilter` 接口。
 
 在构造函数中，您可以定义所有已在依赖注入引擎中注册的接口或对象。
 
@@ -346,7 +358,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 ```
 
-以下是用户界面看到的结果；在端点中，只有对于特定的操作 ID，我们将有一个新的必填头部，该头部带有一个默认参数，在开发中不需要手动插入：
+以下是用户界面看到的结果；在端点中，只有对于特定的 `OperationId`，
+我们将有一个新的必填头部，该头部带有一个默认参数，在开发中不需要手动插入：
 
 ![Figure 3.5 – API key section](/assets/images/minimal-apis/Figure_3.5_B17902.jpg)
 
@@ -364,17 +377,17 @@ builder.Services.AddSwaggerGen(c =>
 ## 启用 CORS
 
 CORS（跨源资源共享）是一种安全机制，通过该机制，如果HTTP/S请求来自于与托管应用程序不同的域，则该请求会被阻止。
-更多信息可以在Microsoft文档或Mozilla开发者站点上找到。
+更多信息可以在 Microsoft 文档或 Mozilla 开发者站点上找到。
 
 浏览器默认会阻止网页向除了提供该网页的域之外的任何域发起请求。
-一个网页、单页应用程序（SPA）或服务器端网页可以向托管在不同源上的几个后端API发起HTTP请求。
+一个网页、单页应用程序（SPA）或服务器端网页可以向托管在不同源上的几个后端 API 发起 HTTP 请求。
 
 这种限制被称为同源策略。同源策略防止恶意网站读取另一个网站的数据。
-浏览器不会阻止HTTP请求，但会阻止响应数据。
+浏览器不会阻止 HTTP 请求，但会阻止响应数据。
 
-因此，我们理解，就安全性而言，必须谨慎评估CORS资格。
+因此，我们理解，就安全性而言，必须谨慎评估 CORS 资格。
 
-最常见的场景是，SPA发布在与托管于 Minimal API 服务的不同Web地址上的Web服务器上。
+最常见的场景是，SPA发布在与托管于 Minimal API 服务的不同 Web 地址上的 Web 服务器上。
 
 ![Figure 3.6 – SPA and minimal API](/assets/images/minimal-apis/Figure_3.6_B17902.jpg)
 
@@ -387,84 +400,95 @@ CORS（跨源资源共享）是一种安全机制，通过该机制，如果HTTP
 我们现在理解了可能发生 CORS 请求的情况。
 现在，让我们看看正确的 HTTP 请求流程是什么，以及浏览器如何处理请求。
 
-### CORS flow from an HTTP request
+### 从 HTTP 请求看 CORS 流程
 
-What happens when a call leaves the browser for a different address other than the one where the frontend is hosted?
+当调用离开浏览器前往与前端托管地址不同的地址时会发生什么？
 
-The HTTP call is executed and it goes all the way to the backend code, which executes correctly.
+HTTP 调用被执行并一直到达后端代码，后端代码正确执行。
 
-The response, with the correct data inside, is blocked by the browser. That’s why when we execute a call with Postman, Fiddler, or any HTTP client, the response reaches us correctly.
+但包含正确数据的响应被浏览器阻止。
+这就是为什么当我们使用 Postman、Fiddler 或任何 HTTP 客户端执行调用时，响应能够正确到达我们的原因。
 
 ![Figure 3.8 – CORS flow](/assets/images/minimal-apis/Figure_3.8_B17902.jpg)
 
-In the following figure, we can see that the browser makes the first call with the OPTIONS method, to which the backend responds correctly with a 204 status code:
+在下面的图中，我们可以看到浏览器首先使用 OPTIONS 方法进行调用，后端以 204 状态码正确响应：
 
 ![Figure 3.9 – First request for the CORS call (204 No Content result)](/assets/images/minimal-apis/Figure_3.9_B17902.jpg)
 
-In the second call that the browser makes, an error occurs; the strict-origin-when-cross-origin value is shown in Referrer Policy, which indicates the refusal by the browser to accept data from the backend:
+随后在浏览器发起的第二个调用是，这里就报错了；
+在 `Referrer Policy` 信息里显示 `strict-origin-when-cross-origin`，以表示浏览器拒绝从服务器后端接收数据
 
 ![Figure 3.10 – Second request for the CORS call (blocked by the browser)](/assets/images/minimal-apis/Figure_3.10_B17902.jpg)
 
-When CORS is enabled, in the response to the OPTIONS method call, three headers are inserted with the characteristics that the backend is willing to respect:
+当 CORS 启用时，在对 OPTIONS 方法调用的响应中，会插入三个具有后端愿意遵守的特征的头：
 
 ![Figure 3.11 – Request for CORS call (with CORS enabled)](/assets/images/minimal-apis/Figure_3.11_B17902.jpg)
 
-In this case, we can see that three headers are added that define Access-Control-Allow-Headers, Access-Control-Allow-Methods, and Access-Control-Allow-Origin.
+在这种情况下，我们可以看到添加了三个头，
+它们定义了 `Access-Control-Allow-Headers`、`Access-Control-Allow-Methods` 和 `Access-Control-Allow-Origin`。
 
-The browser with this information can accept or block the response to this API.
+浏览器可以使用此信息接受或阻止对该 API 的响应。
 
-### Setting CORS with a policy
+### 设置 CORS 使用策略
 
-Many configurations are possible within a .NET 6 application for activating CORS. We can define authorization policies in which the four available settings can be configured. CORS can also be activated by adding extension methods or annotations.
+在.NET 6 应用程序中，可以通过多种配置来激活 CORS。我们可以定义授权策略，在其中可以配置四个可用设置。
+也可以通过添加扩展方法或注释来激活 CORS。
 
-But let us proceed in order.
+但让我们逐一展示。
 
-The CorsPolicyBuilder class allows us to define what is allowed or not allowed within the CORS acceptance policy.
+`CorsPolicyBuilder` 类允许我们定义 CORS 接受策略中允许或不允许的内容。
 
-We have, therefore, the possibility to set different methods, for example:
+因此，我们可以设置不同的方法，例如：
 
-- AllowAnyHeader
-- AllowAnyMethod
-- AllowAnyOrigin
-- AllowCredentials
+- `AllowAnyHeader`
+- `AllowAnyMethod`
+- `AllowAnyOrigin`
+- `AllowCredentials`
 
-While the first three methods are descriptive and allow us to enable any settings relating to the header, method, and origin of the HTTP call, respectively, AllowCredentials allows us to include the cookie with the authentication credentials.
+前三种方法是描述性的，分别允许我们启用与 HTTP 调用的头、方法和源相关的任何设置，而 `AllowCredentials` 允许我们在认证凭证中包含 cookie。
 
-#### CORS policy recommendations
+#### CORS 策略建议
 
-We recommend that you don’t use the AllowAny methods but instead filter out the necessary information to allow for greater security. As a best practice, when enabling CORS, we recommend the use of these methods:
+我们建议不要使用 `AllowAny` 方法，而是筛选出必要信息以提高安全性。
+作为最佳实践，在启用 CORS 时，我们建议使用以下方法：
 
-- WithExposedHeaders
-- WithHeaders
-- WithOrigins
+- `WithExposedHeaders`
+- `WithHeaders`
+- `WithOrigins`
 
-To simulate a scenario for CORS, we created a simple frontend application with three different buttons. Each button allows you to test one of the possible configurations of CORS within the minimal API. We will explain these configurations in a few lines.
+为了模拟 CORS 场景，我们创建了一个带有三个不同按钮的简单前端应用程序。
+每个按钮允许你测试 Minimal API 中 CORS 的一种可能配置。我们将在后续解释这些配置。
 
-To enable the CORS scenario, we have created a single-page application that can be launched on a web server in memory. We have used LiveReloadServer, a tool that can be installed with the .NET CLI. We talked about it at the start of the chapter and now it’s time to use it.
+为了启用 CORS 场景，我们创建了一个可以在内存中的 Web 服务器上启动的单页应用程序。
+我们使用了 `LiveReloadServer`，这是一个可以使用.NET CLI 安装的工具。
+我们在本章开头提到过它，现在是时候使用它了。
 
-After installing it, you need to launch the SPA with the following command:
+安装后，需要使用以下命令启动 SPA：
 
 ```bash
 $ livereloadserver "{BasePath}\Chapter03\2-CorsSample\Frontend"
 ```
 
-Here, BasePath is the folder where you are going to download the examples available on GitHub.
+这里，BasePath 是你要下载 GitHub 上示例的文件夹。
 
-Then you must start the application backend, either through Visual Studio or Visual Studio Code or through the .NET CLI with the following command:
+然后，就得启动应用程序后端，可以通过 Visual Studio、Visual Studio Code 或使用以下命令通过 .NET CLI 启动：
 
 ```bash
 $ dotnet run .\Backend\CorsSample.csproj
 ```
 
-We’ve figured out how to start an example that highlights the CORS problem; now we need to configure the server to accept the request and inform the browser that it is aware that the request is coming from a different source.
+我们已经了解了如何启动一个突出 CORS 问题的示例；
+现在我们需要配置服务器以接受请求并告知浏览器它知道请求来自不同的源。
 
-Next, we will talk about policy configuration. We will understand the characteristics of the default policy as well as how to create a custom one.
+接下来，我们将讨论策略配置。我们将了解默认策略的特征以及如何创建自定义策略。
 
-#### Configuring a default policy
+#### 配置默认策略
 
-To configure a single CORS enabling policy, you need to define the behavior in the Program.cs file and add the desired configurations. Let’s implement a policy and define it as Default.
+要配置单个启用 CORS 的策略，需要在 `Program.cs` 文件中定义行为并添加所需的配置。
+让我们实现一个策略并将其定义为 `Default`。
 
-Then, to enable the policy for the whole application, simply add app.UseCors(); before defining the handlers:
+然后，要为整个应用程序启用该策略，只需在定义处理程序之前添加 `app.UseCors();`：
+
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -483,15 +507,15 @@ app.MapGet("/api/cors", () =>
 app.Run();
 ```
 
-#### Configuring custom policies
+#### 配置自定义策略
 
-We can create several policies within an application; each policy may have its own configuration and each policy may be associated with one or more endpoints.
+我们可以在应用程序中创建多个策略；每个策略可能有自己的配置，并且每个策略可能与一个或多个端点相关联。
 
-In the case of microservices, having several policies helps to precisely segment access from a different source.
+在微服务的情况下，拥有多个策略有助于精确地分割来自不同源的访问。
 
-In order to configure a new policy, it is necessary to add it and give it a name; this name will give access to the policy and allow it to be associated with the endpoint.
+要配置新策略，需要添加它并给它一个名称；这个名称将提供对策略的访问并允许它与端点相关联。
 
-The customized policy, as in the previous example, is assigned to the entire application:
+与前面的示例一样，自定义策略被分配给整个应用程序：
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
@@ -509,13 +533,14 @@ app.MapGet("/api/cors", () =>
 app.Run();
 ```
 
-We next look at how to apply a single policy to a specific endpoint; to this end, two methods are available. The first is via an extension method to the IEndpointConventionBuilder interface. The second method is to add the EnableCors annotation followed by the name of the policy to be enabled for that method.
+接下来，我们看看如何将单个策略应用于特定端点；为此，有两种方法可用。
+第一种是通过 `IEndpointConventionBuilder` 接口的扩展方法。第二种方法是添加 `EnableCors` 注释，后跟要为该方法启用的策略名称。
 
-### Setting CORS with extensions
+### 使用扩展方法设置 CORS
 
-It is necessary to use the RequireCors method followed by the name of the policy.
+需要使用 `RequireCors` 方法后跟策略名称。
 
-With this method, it is then possible to enable one or more policies for an endpoint:
+通过这种方法，可以为一个端点启用一个或多个策略：
 
 ```csharp
 app.MapGet("/api/cors/extension", () =>
@@ -525,9 +550,9 @@ app.MapGet("/api/cors/extension", () =>
 .RequireCors("MyCustomPolicy");
 ```
 
-### Setting CORS with an annotation
+### 使用注解设置 CORS
 
-The second method is to add the EnableCors annotation followed by the name of the policy to be enabled for that method:
+第二种方法是添加 EnableCors 注解，后跟要为该方法启用的策略名称：
 
 ```csharp
 app.MapGet("/api/cors/annotation", [EnableCors("MyCustomPolicy")] () =>
@@ -535,52 +560,56 @@ app.MapGet("/api/cors/annotation", [EnableCors("MyCustomPolicy")] () =>
    return Results.Ok(new { CorsResultJson = true });
 });
 ```
-Regarding controller programming, it soon becomes apparent that it is not possible to apply a policy to all methods of a particular controller. It is also not possible to group controllers and enable the policy. It is therefore necessary to apply the individual policy to the method or the entire application.
 
-In this section, we found out how to configure browser protection for applications hosted on different domains.
+对于控制器编程，很快就会发现不可能将策略应用于特定控制器的所有方法。
+也不可能对控制器进行分组并启用策略。因此，必须将单个策略应用于方法或整个应用程序。
 
-In the next section, we will start configuring our applications.
+在本节中，我们了解了如何为托管在不同域上的应用程序配置浏览器保护。
 
-## Working with global API settings
+在下一节中，我们将开始配置我们的应用程序。
 
-We have just defined how you can load data with the options pattern within an ASP.NET application. In this section, we want to describe how you can configure an application and take advantage of everything we saw in the previous section.
+## 使用全局 API 设置
 
-With the birth of .NET Core, the standard has moved from the Web.config file to the appsettings.json file. The configurations can also be read from other sources, such as other file formats like the old .ini file or a positional file.
+我们刚刚定义了如何在 ASP.NET 应用程序中使用选项模式加载数据。在本节中，我们想描述如何配置应用程序并利用我们在上一节中看到的所有内容。
 
-In minimal APIs, the options pattern feature remains unchanged, but in the next few paragraphs, we will see how to reuse the interfaces or the appsettings.json file structure.
+随着 **.NET Core** 的诞生，配置从 `Web.config` 文件转移到了 `appsettings.json` 文件。
+配置也可以从其他来源读取，例如旧的 **.ini** 文件或位置文件等其他文件格式。
 
+在 Minimal API 中，选项模式功能保持不变，但在接下来的几段中，我们将看到如何重用接口或 `appsettings.json` 文件结构。
 
-### Configuration in .NET 6
+### .NET 6 中的配置
 
-The object provided from .NET is IConfiguration, which allows us to read some specific configurations inside the appsettings file.
+.NET 提供的对象是 `IConfiguration`，它允许我们读取 `appsettings` 文件中的一些特定配置。
 
-But, as described earlier, this interface does much more than just access a file for reading.
+但是，如前所述，这个接口的作用远不止于访问文件进行读取。
 
-The following extract from the official documentation helps us understand how the interface is the generic access point that allows us to access the data inserted in various services:
+以下是官方文档中的一段摘录，帮助我们理解该接口是如何作为通用访问点，允许我们访问插入到各种服务中的数据：
 
-> Configuration in ASP.NET Core is performed using one or more configuration providers. 
-> Configuration providers read configuration data from key-value pairs using a variety of configuration sources.
+> ASP.NET Core 中的配置是使用一个或多个配置提供程序执行的。
+> 配置提供程序使用各种配置源从键值对中读取配置数据。
 
-The following is a list of configuration sources:
+以下是配置源的列表：
 
-- Settings files, such as appsettings.json
-- Environment variables
+- 设置文件，如 `appsettings.json`
+- 环境变量
 - Azure Key Vault
 - Azure App Configuration
-- Command-line arguments
-- Custom providers, installed or created
-- Directory files
-- In-memory .NET objects
+- 命令行参数
+- 已安装或创建的自定义提供程序
+- 目录文件
+- 内存中的.NET 对象
 
 ([https://docs.microsoft.com/aspnet/core/fundamentals/configuration/](https://docs.microsoft.com/aspnet/core/fundamentals/configuration/))
 
-The IConfiguration and IOptions interfaces, which we will see in the next chapter, are designed to read data from the various providers. These interfaces are not suitable for reading and editing the configuration file while the program is running.
+`IConfiguration` 和 `IOptions` 接口（我们将在下一章中看到）旨在从各种提供程序读取数据。
+这些接口不适合在程序运行时读取和编辑配置文件。
 
-The IConfiguration interface is available through the builder object, builder.Configuration, which provides all the methods needed to read a value, an object, or a connection string.
+`IConfiguration` 接口可通过 `builder` 对象（`builder.Configuration`）获得，它提供了读取值、对象或连接字符串所需的所有方法。
 
-After looking at one of the most important interfaces that we will use to configure the application, we want to define good development practices and use a fundamental building block for any developer: namely, classes. Copying the configuration into a class will allow us to better enjoy the content anywhere in the code.
+在查看了我们将用于配置应用程序的最重要接口之一后，我们想要定义良好的开发实践并使用任何开发人员的基本构建块：即类。
+将配置复制到类中，将允许我们在代码的任何地方更好地使用内容。
 
-We define classes containing a property and classes corresponding **appsettings** file:
+我们定义包含属性的类和与 `appsettings` 文件对应的类：
 
 Configuration classes
 
@@ -595,7 +624,7 @@ public class MyCustomStartupObject
 }
 ```
 
-And here, we bring back the corresponding JSON of the C# class that we just saw:
+以下是我们刚刚看到的 C# 类对应的 JSON：
 
 appsettings.json definition
 
@@ -613,18 +642,19 @@ appsettings.json definition
 }
 ```
 
-Next, we will be performing several operations.
+接下来，我们将执行几个操作。
 
-The first operation we perform creates an instance of the startupConfig object that will be of the MyCustomStartupObject type. To populate the instance of this object, through IConfiguration, we are going to read the data from the section called MyCustomStartupObject:
+我们执行的第一个操作创建一个 `startupConfig` 对象的实例，该对象将是 `MyCustomStartupObject` 类型。
+为了填充这个对象的实例，通过 `IConfiguration`，我们将从名为 `MyCustomStartupObject` 的部分读取数据：
 
 ```csharp
 var startupConfig = builder.Configuration.GetSection(nameof(MyCustomStartupObject))
     .Get<MyCustomStartupObject>();
 ```
 
-The newly created object can then be used in the various handlers of the minimal APIs.
+新创建的对象然后可以在 Minimal API 的各种处理程序中使用。
 
-Instead, in this second operation, we use the dependency injection engine to request the instance of the IConfiguration object:
+相反，在第二个操作中，我们使用依赖注入引擎请求 `IConfiguration` 对象的实例：
 
 ```csharp
 app.MapGet("/read/configurations", (IConfiguration configuration) =>
@@ -633,39 +663,44 @@ app.MapGet("/read/configurations", (IConfiguration configuration) =>
         .Get<MyCustomObject>();
 ```
 
-With the IConfiguration object, we will retrieve the data similarly to the operation just described. We select the GetSection(nameof(MyCustomObject)) section and type the object with the Get<T>() method.
+通过 `IConfiguration` 对象，我们将以类似于刚刚描述的操作的方式检索数据。
+我们选择 `GetSection (nameof (MyCustomObject))` 部分，并使用 `Get<T>()` 方法将对象类型化为所需类型。
 
-Finally, in these last two examples, we read a single key, present at the root level of the appsettings file:
+最后，在最后两个示例中，我们读取 `appsettings` 文件根级别上的单个键：
 
 ```csharp
 MyCustomValue = configuration.GetValue<string>("MyCustomValue"),
 ConnectionString = configuration.GetConnectionString("Default"),
 ```
 
-The configuration.GetValue<T>(“JsonRootKey”) method extracts the value of a key and converts it into an object; this method is used to read strings or numbers from a root-level property.
+`configuration.GetValue<T>("JsonRootKey")` 方法提取键的值并将其转换为对象；此方法用于从根级别属性读取字符串或数字。
 
-In the next line, we can see how you can leverage an IConfiguration method to read ConnectionString.
+在下一行中，我们可以看到如何利用 `IConfiguration` 方法读取 `ConnectionString`。
 
-In the appsettings file, connection strings are placed in a specific section, ConnectionStrings, that allows you to name the string and read it. Multiple connection strings can be placed in this section to exploit it in different objects.
+在 `appsettings` 文件中，连接字符串放置在一个特定的部分 `ConnectionStrings` 中，允许你命名字符串并读取它。
+可以在这个部分放置多个连接字符串，以便在不同的对象中使用它们。
 
-In the configuration provider for Azure App Service, connection strings should be entered with a prefix that also indicates the SQL provider you are trying to use, as described in the following link: [https://docs.microsoft.com/azure/app-service/configure-common#configure-connection-strings](https://docs.microsoft.com/azure/app-service/configure-common#configure-connection-strings).
+在 Azure App Service 的配置提供程序中，连接字符串应该带有一个前缀输入，该前缀也指示你正在尝试使用的 SQL 提供程序，如以下链接所述：
+[https://docs.microsoft.com/azure/app-service/configure-common#configure-connection-strings](https://docs.microsoft.com/azure/app-service/configure-common#configure-connection-strings).
 
-At runtime, connection strings are available as environment variables, prefixed with the following connection types:
+在运行时，连接字符串作为环境变量可用，带有以下连接类型前缀：
 
-- SQLServer: SQLCONNSTR_
-- MySQL: MYSQLCONNSTR_
-- SQLAzure: SQLAZURECONNSTR_
-- Custom: CUSTOMCONNSTR_
-- PostgreSQL: POSTGRESQLCONNSTR_
+- SQLServer: **SQLCONNSTR_**
+- MySQL: **MYSQLCONNSTR_**
+- SQLAzure: **SQLAZURECONNSTR_**
+- Custom: **CUSTOMCONNSTR_**
+- PostgreSQL: **POSTGRESQLCONNSTR_**
 
-For completeness, we will bring back the entire code just described in order to have a better general picture of how to exploit the IConfiguration object inside the code:
+为了完整性，我们将带回刚刚描述的整个代码，以便更好地全面了解如何在代码中利用 `IConfiguration` 对象：
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
-var startupConfig = builder.Configuration.GetSection(nameof(MyCustomStartupObject)).Get<MyCustomStartupObject>();
+var startupConfig = builder.Configuration.GetSection(nameof(MyCustomStartupObject))
+    .Get<MyCustomStartupObject>();
 app.MapGet("/read/configurations", (IConfiguration configuration) =>
 {
-    var customObject = configuration.GetSection(nameof(MyCustomObject)).Get<MyCustomObject>();
+    var customObject = configuration.GetSection(nameof(MyCustomObject))
+        .Get<MyCustomObject>();
     return Results.Ok(new
     {
         MyCustomValue = configuration.GetValue<string>("MyCustomValue"),
@@ -678,15 +713,17 @@ app.MapGet("/read/configurations", (IConfiguration configuration) =>
 .WithName("ReadConfigurations");
 ```
 
-We’ve seen how to take advantage of the appsettings file with connection strings, but very often, we have many different files for each environment. Let’s see how to take advantage of one file for each environment.
+我们已经看到了如何利用带有连接字符串的 `appsettings` 文件，但通常情况下，每个环境都有许多不同的文件。
+让我们看看如何为每个环境利用一个文件。
 
-#### Priority in appsettings files
+#### `appsettings` 文件中的优先级
 
-The appsettings file can be managed according to the environments in which the application is located. In this case, the practice is to place key information for that environment in the appsettings.{ENVIRONMENT}.json file.
+`appsettings` 文件可以根据应用程序所在的环境进行管理。
+在这种情况下，实践是将该环境的关键信息放置在 `appsettings.{ENVIRONMENT}.json` 文件中。
 
-The root file (that is, appsettings.json) should be used for the production environment only.
+根文件（即 `appsettings.json`）应该仅用于生产环境。
 
-For example, if we created these examples in the two files for the “Priority” key, what would we get?
+例如，如果我们在两个文件中为 "Priority" 键创建这些示例，我们会得到什么？
 
 appsettings.json
 
@@ -698,21 +735,26 @@ appsettings.Development.json
 "Priority":"Dev"
 ```
 
-If it is a Development environment, the value of the key would result in Dev, while in a Production environment, the value would result in Root.
+如果是*开发环境*，键的值将是 **Dev**，而在*生产环境*中，值将是 **Root**。
 
-What would happen if the environment was anything other than Production or Development? For example, if it were called Stage? In this case, having not specified any appsettings.Stage.json file, the read value would be that of one of the appsettings.json files and therefore, Root.
+如果环境不是*生产*或*开发*环境会发生什么？例如，如果它被称为 _Stage_？
+在这种情况下，如果没有指定任何 `appsettings.Stage.json` 文件，
+读取的值将是 `appsettings.json` 文件之一的值，因此是 **Root**。
 
-However, if we specified the appsettings.Stage.json file, the value would be read from the that file.
+但是，如果我们指定了 `appsettings.Stage.json` 文件，将从该文件读取值。
 
-Next, let’s visit the Options pattern. There are objects that the framework provides to load configuration information upon startup or when changes are made by the systems department. Let’s go over how.
+接下来，让我们看看选项模式。
+有一些框架提供的对象，用于在启动时或系统部门进行更改时加载配置信息。
+让我们看看如何实现。
 
-### Options pattern
+### Options 模式
 
-The options pattern uses classes to provide strongly typed access to groups of related settings, that is, when configuration settings are isolated by scenario into separate classes.
+`Options` 模式使用类来提供对相关设置组的强类型访问，即当配置设置根据场景隔离到单独的类中时。
 
-The options pattern will be implemented with different interfaces and different functionalities. Each interface (see the following subsection) has its own features that help us achieve certain goals.
+`Options` 模式将通过不同的接口和不同的功能来实现。每个接口（见以下小节）都有自己的功能，帮助我们实现某些目标。
 
-But let’s start in order. We define an object for each type of interface (we will do it to better represent the examples), but the same class can be used to register more options inside the configuration file. It is important to keep the structure of the file identical:
+但让我们按顺序进行。我们为每种类型的接口定义一个对象（我们这样做是为了更好地表示示例），但同一个类可以用于在配置文件中注册更多选项。
+这里保持文件结构同样很重要：
 
 ```csharp
 public class OptionBasic
@@ -736,7 +778,8 @@ public class OptionCustomName
 }
 ```
 
-Each option is registered in the dependency injection engine via the Configure method, which also requires the registration of the T type present in the method signature. As you can see, in the registration phase, we declared the types and the section of the file where to retrieve the information, and nothing more:
+每个选项都通过 `Configure` 方法在依赖注入引擎中注册，该方法还需要注册方法签名中存在的 `T` 类型。
+如你所见，在注册阶段，我们声明了类型和文件中检索信息的部分，仅此而已：
 
 ```csharp
 builder.Services.Configure<OptionBasic>(
@@ -751,35 +794,39 @@ builder.Services.Configure<OptionCustomName>("CustomName2",
     builder.Configuration.GetSection("CustomName2"));
 ```
 
-We have not yet defined how the object should be read, how often, and with what type of interface.
+我们无须定义应该如何读取对象、读取的频率以及使用什么类型的接口。
 
-The only thing that changes is the parameter, as seen in the last two examples of the preceding code snippet. This parameter allows you to add a name to the option type. The name is required to match the type used in the method signature. This feature is called named options.
+唯一改变的是参数，如前面代码片段的最后两个示例所示。这个参数允许你为选项类型添加一个名称。
+名称需要与方法签名中使用的类型匹配。这个功能亦因此称为**强命名选项（named options）**。
 
-#### Different option interfaces
+#### 其他 option 接口
 
-Different interfaces can take advantage of the recordings you just defined. Some support named options and some do not:
+其他 option 接口可以利用你刚刚定义的记录。一些支持命名选项，而一些不支持：
 
-- IOptions<TOptions>:
-  - Does not support the following:
-    - Reading of configuration data after the app has started
-    - Named options
-  - Is registered as a singleton and can be injected into any service lifetime
-- IOptionsSnapshot<TOptions>:
-  - Is useful in scenarios where options should be recomputed on every request
-  - Is registered as scoped and therefore cannot be injected into a singleton service
-  - Supports named options
-- IOptionsMonitor<TOptions>:
-  - Is used to retrieve options and manage options notifications for TOptions instances
-  - Is registered as a singleton and can be injected into any service lifetime
-  - Supports the following:
-    - Change notifications
-    - Named options
-    - Reloadable configuration
-    - Selective options invalidation (IOptionsMonitorCache<TOptions>)
+- `IOptions<TOptions>`:
+  - 不支持以下内容：
+    - 应用程序启动后读取配置数据
+    - 强命名选项
+  - 注册为单例并注入到任何服务生命周期中
+- `IOptionsSnapshot<TOptions>`:
+  - 在每个请求都应重新计算选项的场景中很有用
+  - 注册为作用域，因此不能注入到单例服务中
+  - 支持强命名选项
+- `IOptionsMonitor<TOptions>`:
+  - 用于检索选项并管理 `TOptions` 实例的选项通知
+  - 注册为单例并可以注入到任何服务生命周期中
+  - 支持以下内容：
+    - 更改通知
+    - 强命名选项
+    - 可重新加载的配置
+    - 选择性选项失效 (`IOptionsMonitorCache<TOptions>`)
 
-We want to point you to the use of IOptionsFactory<TOptions>, which is responsible for creating new instances of options. It has a single Create method. The default implementation takes all registered IConfigureOptions<TOptions> and IPostConfigureOptions<TOptions> and performs all configurations first, followed by post-configuration (https://docs.microsoft.com/aspnet/core/fundamentals/configuration/options#options-interfaces).
+我们想提醒你使用 `IOptionsFactory<TOptions>`，它负责创建选项的新实例。它有一个单一的 `Create` 方法。
+默认实现获取所有已注册的 `IConfigureOptions<TOptions>` 和 `IPostConfigureOptions<TOptions>`，并首先执行所有配置，
+然后执行后配置 ([https://docs.microsoft.com/aspnet/core/fundamentals/configuration/options#options-interfaces](https://docs.microsoft.com/aspnet/core/fundamentals/configuration/options#options-interfaces))。
 
-The Configure method can also be followed by another method in the configuration pipeline. This method is called PostConfigure and is intended to modify the configuration each time it is configured or reread. Here is an example of how to record this behavior:
+`Configure` 方法之后可以跟在配置管道中的另一个方法。这个方法称为 `PostConfigure`，用于在每次配置或重新读取时修改配置。
+以下是如何记录这种行为的示例：
 
 ```csharp
 builder.Services.PostConfigure<MyConfigOptions>(myOptions =>
@@ -788,11 +835,11 @@ builder.Services.PostConfigure<MyConfigOptions>(myOptions =>
 });
 ```
 
-#### Putting it all together
+#### 综合应用
 
-Having defined the theory of these numerous interfaces, it remains for us to see IOptions at work with a concrete example.
+定义了这些众多接口的理论之后，我们还需要看看 `IOptions` 在具体示例中的工作情况。
 
-Let’s see the use of the three interfaces just described and the use of IOptionsFactory, which, along with the Create method and with the named options function, retrieves the correct instance of the object:
+让我们看看刚刚描述的三个接口的使用以及 `IOptionsFactory` 的使用，它与 `Create` 方法和命名选项功能一起，检索对象的正确实例：
 
 ```csharp
 app.MapGet("/read/options", (IOptions<OptionBasic> optionsBasic,
@@ -812,17 +859,20 @@ app.MapGet("/read/options", (IOptions<OptionBasic> optionsBasic,
 .WithName("ReadOptions");
 ```
 
-In the previous code snippet, we want to bring attention to the use of the different interfaces available.
+在前面的代码片段中，我们想提醒你注意使用不同的可用接口。
 
-Each individual interface used in the previous snippet has a particular life cycle that characterizes its behavior. Finally, each interface has slight differences in the methods, as we have already described in the previous paragraphs.
+前面片段中使用的每个单独接口都有一个特定的生命周期，这决定了它的行为。
+最后，每个接口在方法上都有细微的差异，正如我们在前面段落中已经描述的那样。
 
-#### IOptions and validation
+#### IOptions 和验证
 
-Last but not least is the validation functionality of the data present in the configuration. This is very useful when the team that has to release the application still performs manual or delicate operations that need to be at least verified by the code.
+最后但并非最不重要的是配置中数据的验证功能。
+当必须发布应用程序的团队仍然执行手动或精细操作时，这非常有用，这些操作至少需要由代码进行验证。
 
-Before the advent of .NET Core, very often, the application would not start because of an incorrect configuration. Now, with this feature, we can validate the data in the configuration and throw errors.
+在 .NET Core 出现之前，由于配置不正确，应用程序经常无法启动。
+现在，有了这个功能，我们可以验证配置中的数据并抛出错误。
 
-Here is an example:
+以下是一个示例：
 
 Register option with validation
 
@@ -842,18 +892,16 @@ app.MapGet("/read/options", (IOptions<ConfigWithValidation> optionsValidation) =
 .WithName("ReadOptions");
 ```
 
-This is the configuration file where an error is explicitly reported:
-
-Appsettings section for configuration validation
+这是一个明确报告错误的配置文件：
 
 ```json
-“ConfigWithValidation": {
+"ConfigWithValidation": {
     "Email": "andrea.tosato@hotmail.it",
     "NumericRange": 1001
 }
 ```
 
-And here is the class containing the validation logic:
+以下是包含验证逻辑的类：
 
 ```csharp
 public class ConfigWithValidation
@@ -866,54 +914,56 @@ public class ConfigWithValidation
 }
 ```
 
-The application then encounters errors while using the particular configuration and not at startup. This is also because, as we have seen before, IOptions could reload information following a change in appsettings:
-
-Error validate option
+应用程序在使用特定配置时会遇到错误，而不是在启动时。这也是因为，正如我们之前所见，`IOptions` 可以在 `appsettings` 更改后重新加载信息。
 
 ```
 Microsoft.Extensions.Options.OptionsValidationException: 
-DataAnnotation validation failed for 'ConfigWithValidation' members: 'NumericRange' with the error:
-'Value for NumericRange must be between 0 and 1000.'.
+  DataAnnotation validation failed for 'ConfigWithValidation' members: 'NumericRange' with the error:
+    'Value for NumericRange must be between 0 and 1000.'.
 ```
 
-#### Best practice for using validation in IOptions
+#### 验证 `IOptions` 的最佳实践
 
-This setting is not suitable for all application scenarios. Only some options can have formal validations; if we think of a connection string, it is not necessarily formally incorrect, but the connection may not be working.
+此设置并不适用于所有应用场景，只有一些选项可以进行正式验证；
+如果我们考虑连接字符串，它不一定在形式上不正确，但连接可能无法工作。
 
-Be cautious about applying this feature, especially since it reports errors at runtime and not during startup and gives an Internal Server Error, which is not a best practice in scenarios that should be handled.
+在应用此功能时要谨慎，特别是因为它在运行时报告错误而不是在启动时，
+并且会给出内部服务器错误，这在应该处理的场景中不是最佳实践。
 
-Everything we’ve seen up to this point is about configuring the appsettings.json file, but what if we wanted to use other sources for configuration management? We’ll look at that in the next section.
+到目前为止，我们所看到的一切都是关于配置 `appsettings.json` 文件的，
+但如果我们想使用其他来源进行配置管理呢？我们将在下一节中探讨这个问题。
 
-### Configuration sources
+### 配置源
 
-As we mentioned at the beginning of the section, the IConfiguration interface and all variants of IOptions work not only with the appsettings file but also on different sources.
+如本节开头所述，`IConfiguration` 接口和所有 `IOptions` 变体不仅适用于 `appsettings` 文件，还适用于不同的来源。
 
-Each source has its own characteristics, and the syntax for accessing objects is very similar between providers. The main problem is when we must define a complex object or an array of objects; in this case, we will see how to behave and be able to replicate the dynamic structure of a JSON file.
+每个来源都有其自身的特点，并且在提供程序之间访问对象的语法非常相似。 主要问题是当我们必须定义一个复杂对象或对象数组时；
+在这种情况下，我们将看到如何操作并能够复制 JSON 文件的动态结构。
 
-Let’s look at two very common use cases.
+让我们看两个非常常见的用例。
 
-#### Configuring an application in Azure App Service
+#### 在 Azure App Service 中配置应用程序
 
-Let’s start with Azure, and in particular, the Azure Web Apps service.
+让我们从 Azure 开始，特别是 Azure Web Apps 服务。
 
-On the Configuration page, there are two sections: Application settings and Connection strings.
+在 **“配置”** 页面上，有两个部分：**“应用程序设置”** 和 **“连接字符串”**。
 
-In the first section, we need to insert the keys and values or JSON objects that we saw in the previous examples.
+在第一部分中，我们需要插入我们在前面示例中看到的键和值或 JSON 对象。
 
-In the Connection strings section, you can insert the connection strings that are usually inserted in the appsettings.json file. In this section, in addition to the textual string, it is necessary to set the connection type, as we saw in the Configuration in .NET 6 section.
+在 **“连接字符串”** 部分，你可以插入通常插入在 `appsettings.json` 文件中的连接字符串。
+在本节中，除了文本字符串外，还需要设置连接类型，正如我们在 _“.NET 6 中的配置”_ 部分中看到的那样。
 
 ![Figure 3.12 – Azure App Service Application settings](/assets/images/minimal-apis/Figure_3.12_B17902.jpg)
 
-##### Inserting an object
+##### 插入一个对象
 
+要插入一个对象，我们必须为每个键指定父级。
 
-To insert an object, we must specify the parent for each key.
-
-The format is as follows:
+格式如下：
 
 **parent__key**
 
-Note that there are two underscores.
+注意有**两个**下划线。
 
 The object in the JSON file would be defined as follows:
 
@@ -923,17 +973,17 @@ The object in the JSON file would be defined as follows:
 }
 ```
 
-So, we should write MyCustomObject__CustomProperty.
+所以，我们应该写 **MyCustomObject__CustomProperty**。
 
-##### Inserting an array
+##### 插入一个数组
 
-Inserting an array is much more verbose.
+插入一个数组要详细得多。
 
-The format is as follows:
+格式如下：
 
 **parent__child__ArrayIndexNumber_key**
 
-The array in the JSON file would be defined as follows:
+JSON 文件中的数组将定义如下：
 
 ```json
 {
@@ -946,17 +996,19 @@ The array in the JSON file would be defined as follows:
 }
 ```
 
-So, to access the ValueOne value, we should write the following:
+因此，要访问 `ValueOne` 值，我们应该写：
 
 ```
 MyCustomArray__CustomPropertyArray__0__CustomKey
 ```
 
-#### Configuring an application in Docker
+#### 在 Docker 中配置应用程序
 
-If we are developing for containers and therefore for Docker, appsettings files are usually replaced in the docker-compose file, and very often in the override file, because it behaves analogously to the settings files divided by the environment.
+如果我们正在为容器（即 Docker）进行开发，通常会在 `docker-compose` 文件中替换 `appsettings` 文件，
+并且通常在覆盖文件中替换，因为它的行为类似于按环境划分的设置文件。
 
-We want to provide a brief overview of the features that are usually leveraged to configure an application hosted in Docker. Let’s see in detail how to define root keys and objects, and how to set the connection string. Here is an example:
+我们想简要概述通常用于配置托管在 Docker 中的应用程序的功能。
+让我们详细看看如何定义根键和对象，以及如何设置连接字符串。以下是一个示例：
 
 ```csharp
 app.MapGet("/env-test", (IConfiguration configuration) =>
@@ -974,9 +1026,7 @@ app.MapGet("/env-test", (IConfiguration configuration) =>
 .WithName("EnvironmentTest");
 ```
 
-Minimal APIs that use configuration
-
-The docker-compose.override.yaml file is as follows:
+使用配置的 Minimal API 的 `docker-compose.override.yaml` 文件如下：
 
 ```yaml
 services:
@@ -988,60 +1038,64 @@ services:
       - ConnectionStrings__SqlConnection=Server=minimal.db;Database=minimal_db;User Id=sa;Password=Taggia42!
 ```
 
-There is only one application container for this example, and the service that instantiates it is called dockerenvironment.
+这个示例中只有一个应用程序容器，实例化它的服务称为 `dockerenvironment`。
 
-In the configuration section, we can see three particularities that we are going to analyze line by line.
+在配置部分，我们可以看到三个特殊之处，我们将逐行分析。
 
-The snippet we want to show you has several very interesting components: a property in the configuration root, an object composed of a single property, and a connection string to a database.
+我们想向你展示的代码片段有几个非常有趣的组件：
+配置根目录中的一个属性、由单个属性组成的一个对象以及到数据库的连接字符串。
 
-In this first configuration, you are going to set a property that is the root of the configurations. In this case, it is a simple string:
-
+在第一个配置中，你将设置一个作为配置根的属性。在这种情况下，它是一个简单的字符串：
 ```yaml
 # First configuration
 - RootProperty=minimalapi-root-value
 ```
 
-In this second configuration, we are going to set up an object:
+在第二个配置中，我们将设置一个对象：
 ```yaml
 # Second configuration
 - RootSettings__SampleVariable=minimalapi-variable-value
 ```
 
-The object is called RootSettings, while the only property it contains is called SampleVariable. This object can be read in different ways. We recommend using the Ioptions object that we have seen extensively before. In the preceding example, we show how to access a single property present in an object via code.
+对象称为 `RootSettings`，而它包含的唯一属性称为 `SampleVariable`。这个对象可以通过不同的方式读取。
+我们建议使用我们之前广泛看到的 `IOptions` 对象。在前面的示例中，我们展示了如何通过代码访问对象中存在的单个属性。
 
-In this case, via code, you need to use the following notation to access the value: RootSettings:SampleVariable. This approach is useful if you need to read a single property, but we recommend using the Ioptions interfaces to access the object.
+在这种情况下，通过代码，你需要使用以下符号来访问值：`RootSettings:SampleVariable`。
+这种方法在你需要读取单个属性时很有用，但我们建议使用 `IOptions` 接口来访问对象。
 
-In this last example, we show you how to set the connection string called SqlConnection. This way, it will be easy to retrieve the information from the base methods available on Iconfiguration:
-
+在最后一个示例中，我们向你展示如何设置名为 `SqlConnection` 的连接字符串。
+这样，就可以很容易地从 `IConfiguration` 可用的基本方法中检索信息：
 ```yaml
 # Third configuration
 - ConnectionStrings__SqlConnection=Server=minimal.db;Database=minimal_db;User Id=sa;Password=Taggia42!
 ```
 
-To read the information, it is necessary to exploit this method:
+要读取信息，只需要暴露这样一个方法即可：
 
 ```csharp
 GetConnectionString(“SqlConnection”)
 ```
 
-There are a lot of scenarios for configuring our applications; in the next section, we will also see how to handle errors.
+有很多配置我们应用程序的场景；在下一节中，我们还将看到如何处理错误。
 
+## 错误处理
 
-## Error handling
+错误处理是每个应用程序都必须提供的功能之一。错误的表示允许客户端理解错误并可能相应地处理请求。
+通常，我们有自己定制的错误处理方法。
 
-Error handling is one of the features that every application must provide. The representation of an error allows the client to understand the error and possibly handle the request accordingly. Very often, we have our own customized methods of handling errors.
+由于我们正在描述的是应用程序的关键功能，我们认为看看框架提供了什么以及使用什么更正确是合理的。
 
-Since what we’re describing is a key functionality of the application, we think it’s fair to see what the framework provides and what is more correct to use.
+### 传统方法
 
-### Traditional approach
-
-.NET provides the same tool for minimal APIs that we can implement in traditional development: a Developer Exception Page. This is nothing but middleware that reports the error in plain text format. This middleware can’t be removed from the ASP.NET pipeline and works exclusively in the development environment (https://docs.microsoft.com/aspnet/core/fundamentals/error-handling).
+.NET 为 Minimal API 提供了与传统开发中相同的工具：开发人员异常页面。这只不过是一个以纯文本格式报告错误的中间件。
+这个中间件不能从 ASP.NET 管道中删除，并且仅在开发环境中工作 
+([https://docs.microsoft.com/aspnet/core/fundamentals/error-handling](https://docs.microsoft.com/aspnet/core/fundamentals/error-handling)).
 
 ![Figure 3.13 – Minimal APIs pipeline, ExceptionHandler](/assets/images/minimal-apis/Figure_3.13_B17902.jpg)
 
-If exceptions are raised within our code, the only way to catch them in the application layer is through middleware that is activated before sending the response to the client.
+如果在我们的代码中引发异常，在应用层捕获它们的唯一方法是通过在将响应发送到客户端之前激活的中间件。
 
-Error handling middleware is standard and can be implemented as follows:
+错误处理中间件是标准的，可以如下实现：
 
 ```csharp
 app.UseExceptionHandler(exceptionHandlerApp =>
@@ -1050,7 +1104,8 @@ app.UseExceptionHandler(exceptionHandlerApp =>
     {
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Response.ContentType = Application.Json;
-        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>()!;
+        var exceptionHandlerPathFeature = 
+            context.Features.Get<IExceptionHandlerPathFeature>()!;
         var errorMessage = new
         {
             Message = exceptionHandlerPathFeature.Error.Message
@@ -1068,9 +1123,10 @@ app.UseExceptionHandler(exceptionHandlerApp =>
 });
 ```
 
-We have shown here a possible implementation of the middleware. In order to be implemented, the UseExceptionHandler method must be exploited, allowing the writing of management code for the whole application.
+我们在这里展示了中间件的一种可能实现。为了实现它，必须利用 `UseExceptionHandler` 方法，允许编写整个应用程序的管理代码。
 
-Through the var functionality called exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>()!;, we can access the error stack and return the information of interest for the caller in the output:
+通过 `var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>()!;`,
+我们可以访问错误堆栈并在输出中返回调用者感兴趣的信息：
 
 ```csharp
 app.MapGet("/ok-result", () =>
@@ -1079,29 +1135,35 @@ app.MapGet("/ok-result", () =>
 })
 .WithName("OkResult");
 ```
-When an exception occurs in the code, as in the preceding example, the middleware steps in and handles the return message to the client.
 
-If the exception were to occur in internal application stacks, the middleware would still intervene to provide the client with the correct error and appropriate indication.
+当代码中发生异常时，如前面的示例所示，中间件会介入并处理返回给客户端的消息。
 
-### Problem Details and the IETF standard
+如果异常发生在内部应用程序堆栈中，中间件仍会介入，为客户端提供正确的错误和适当的指示。
 
-Problem Details for HTTP APIs is an IETF standard that was approved in 2016. This standard allows a set of information to be returned to the caller with standard fields and JSON notations that help identify the error.
+### 问题详情和 IETF 标准
 
-HTTP status codes are sometimes not enough to convey enough information about an error to be useful. While the humans behind web browsers can be informed about the nature of the problem with an HTML response body, non-human consumers, such as machine, PC, and server, of so-called HTTP APIs usually cannot.
+HTTP API 的问题详情是 2016 年批准的 IETF 标准。此标准允许使用标准字段和 JSON 表示法向调用者返回一组信息，以帮助识别错误。
 
-This specification defines simple JSON and XML document formats to suit this purpose. They are designed to be reused by HTTP APIs, which can identify distinct problem types specific to their needs.
+HTTP 状态码有时不足以传达有关错误的足够信息以使其有用。
+虽然 Web 浏览器背后的人可以通过 HTML 响应体了解问题的性质，但所谓 HTTP API 的非人类消费者（如机器、PC 和服务器）通常不能。
 
-Thus, API clients can be informed of both the high-level error class and the finer-grained details of the problem (https://datatracker.ietf.org/doc/html/rfc7807).
+此规范定义了简单的 JSON 和 XML 文档格式以满足此目的。
+它们旨在被 HTTP API 重用，这些 API 可以识别特定于其需求的不同问题类型。
 
-In .NET, there is a package with all the functionality that meets the IETF standard.
+因此，API 客户端可以被告知高级错误类以及问题的更详细信息 
+([https://datatracker.ietf.org/doc/html/rfc7807](https://datatracker.ietf.org/doc/html/rfc7807)).
 
-The package is called Hellang.Middleware.ProblemDetails, and you can download it at the following address: https://www.nuget.org/packages/Hellang.Middleware.ProblemDetails/.
+在.NET 中，有一个包含符合 IETF 标准的所有功能的包。
 
-Let’s see now how to insert the package into the project and configure it:
+该包名为 `Hellang.Middleware.ProblemDetails`，你可以从以下地址下载：
+[https://www.nuget.org/packages/Hellang.Middleware.ProblemDetails/](https://www.nuget.org/packages/Hellang.Middleware.ProblemDetails/).
+
+现在让我们看看如何将该包插入项目并配置它：
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.TryAddSingleton<IActionResultExecutor<ObjectResult>, ProblemDetailsResultExecutor>();
+builder.Services.TryAddSingleton<IActionResultExecutor<ObjectResult>, 
+    ProblemDetailsResultExecutor>();
 builder.Services.AddProblemDetails(options =>
 {
     options.MapToStatusCode<NotImplementedException>(StatusCodes.Status501NotImplemented);
@@ -1110,20 +1172,21 @@ var app = builder.Build();
 app.UseProblemDetails();
 ```
 
-As you can see, there are only two instructions to make this package work:
+如你所见，使这个包工作只需要两行代码：
 
-- builder.Services.AddProblemDetails
-- app.UseProblemDetails();
+- `builder.Services.AddProblemDetails`
+- `app.UseProblemDetails();`
 
-Since, in the minimal APIs, the IActionResultExecutor interface is not present in the ASP.NET pipeline, it is necessary to add a custom class to handle the response in case of an error.
+由于在 Minimal API 中，`IActionResultExecutor` 接口不在 ASP.NET 管道中，因此需要添加一个自定义类来在发生错误时处理响应。
 
-To do this, you need to add a class (the following) and register it in the dependency injection engine:
+为此，你需要添加一个类（如下所示）并在依赖注入引擎中注册它：
 
 ```csharp
-builder.Services.TryAddSingleton<IActionResultExecutor<ObjectResult>, ProblemDetailsResultExecutor>();
+builder.Services.TryAddSingleton<IActionResultExecutor<ObjectResult>,
+    ProblemDetailsResultExecutor>();
 ```
 
-Here is the class to support the package, also under minimal APIs:
+以下是支持该包的类，也适用于 Minimal API：
 
 ```csharp
 public class ProblemDetailsResultExecutor : IActionResultExecutor<ObjectResult>
@@ -1132,15 +1195,18 @@ public class ProblemDetailsResultExecutor : IActionResultExecutor<ObjectResult>
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(result);
-        var executor = Results.Json(result.Value, null, "application/problem+json", result.StatusCode);
+        var executor = Results.Json(result.Value, 
+            null, 
+            "application/problem+json", 
+            result.StatusCode);
         return executor.ExecuteAsync(context.HttpContext);
     }
 }
 ```
 
-As mentioned earlier, the standard for handling error messages has been present in the IETF standard for several years, but for the C# language, it is necessary to add the package just mentioned.
+如前所述，处理错误消息的标准在 IETF 标准中已经存在了几年，但对于 C# 语言，需要添加刚刚提到的包。
 
-Now, let’s see how this package goes about handling errors on some endpoints that we report here:
+现在让我们看看这个包如何处理我们在这里报告的一些端点上的错误：
 
 ```csharp
 app.MapGet("/internal-server-error", () =>
@@ -1151,7 +1217,9 @@ app.MapGet("/internal-server-error", () =>
 .WithName("internal-server-error");
 ```
 
-We throw an application-level exception with this endpoint. In this case, the ProblemDetails middleware goes and returns a JSON error consistent with the error. We then have the handling of an unhandled exception for free:
+我们使用这个端点抛出一个应用程序级别的异常。
+在这种情况下，`ProblemDetails` 中间件会返回一个与错误一致的 JSON 错误。
+然后我们免费获得了对未处理异常的处理：
 
 ```json
 {
@@ -1166,7 +1234,7 @@ We throw an application-level exception with this endpoint. In this case, the Pr
 }
 ```
 
-By inserting additional configurations in the Program file, you can map some specific exceptions to HTTP errors. Here is an example:
+通过在 `Program` 文件中插入其他配置，你可以将一些特定的异常映射到 HTTP 错误。以下是一个示例：
 
 ```csharp
 builder.Services.AddProblemDetails(options =>
@@ -1175,7 +1243,7 @@ builder.Services.AddProblemDetails(options =>
 });
 ```
 
-The code with the NotImplementedException exception is mapped to HTTP error code 501:
+带有 `NotImplementedException` 异常的代码被映射到 HTTP 错误代码 501：
 
 ```csharp
 app.MapGet("/not-implemented-exception", () =>
@@ -1186,9 +1254,9 @@ app.MapGet("/not-implemented-exception", () =>
 .WithName("NotImplementedExceptions");
 ```
 
-Finally, it is possible to create extensions to the ProblemDetails class of the framework with additional fields or to call the base method by adding custom text.
+最后，可以使用其他字段扩展框架的 `ProblemDetails` 类或通过添加自定义文本来调用基方法。
 
-Here are the last two examples of MapGet endpoint handlers:
+以下是 `MapGet` 端点处理程序的最后两个示例：
 
 ```csharp
 app.MapGet("/problems", () =>
@@ -1227,14 +1295,17 @@ public class OutOfCreditProblemDetails : ProblemDetails
 }
 ```
 
-## Summary
+## 总结
 
-In this chapter, we have seen several advanced aspects regarding the implementation of minimal APIs. We explored Swagger, which is used to document APIs and provide the developer with a convenient, working debugging environment. We saw how CORS handles the issue of applications hosted on different addresses other than the current API. Finally, we saw how to load configuration information and handle unexpected errors in the application.
+在本章中，我们看到了 Minimal API 实现的几个高级方面。
+我们探索了 Swagger，它用于为 API 编写文档并为开发人员提供方便的工作调试环境。
+我们看到了 CORS 如何处理托管在与当前 API 不同地址的应用程序的问题。
+最后，我们看到了如何加载配置信息并处理应用程序中的意外错误。
 
-We explored the nuts and bolts that will allow us to be productive in a short amount of time.
+我们探索了将使我们在短时间内提高生产力的要点。
 
-In the next chapter, we will add a fundamental building block for SOLID pattern-oriented programming, namely the dependency injection engine, which will help us to better manage the application code scattered in the various layers.
-
+在下一章中，我们将添加面向 SOLID 模式编程的基本构建块，即依赖注入引擎，
+它将帮助我们更好地管理分散在各个层中的应用程序代码。
 
 <br/><br/><br/><br/>
 &gt;  [返回扉页](/books/minimal-apis)
