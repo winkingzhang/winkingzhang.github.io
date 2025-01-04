@@ -18,13 +18,13 @@ minimal_apis:
     children:
       - title: "Minimal APIs 简介"
         url: /books/minimal-apis/chapter-01
-      - title: "探索 Minimal APIs 及其优点"
+      - title: "探索 Minimal APIs 优点"
         url: /books/minimal-apis/chapter-02
       - title: "使用 Minimal APIs"
         url: /books/minimal-apis/chapter-03
   - title: "第二部分，.NET 6 新功能"
     children:
-      - title: "Minimal APIs 项目中的依赖注入"
+      - title: "Minimal APIs 项目依赖注入"
         url: /books/minimal-apis/chapter-04
       - title: "使用日志记录识别错误"
         url: /books/minimal-apis/chapter-05
@@ -38,6 +38,6 @@ minimal_apis:
         url: /books/minimal-apis/chapter-08
       - title: "利用全球化和本地化"
         url: /books/minimal-apis/chapter-09
-      - title: "评估性能并对其进行基准测试"
+      - title: "评估性能并进行基准测试"
         url: /books/minimal-apis/chapter-10
 
