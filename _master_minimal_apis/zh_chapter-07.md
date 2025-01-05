@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-07
+permalink: /books/master-minimal-apis/chapter-07
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -136,7 +136,7 @@ app.MapPost("/icecreams", async (IcecreamDb db, Icecream icecream) =>
 >
 > 依赖注入： 
 > 
-> 如果你想了解更多关于依赖注入的信息，请转到 [第 4 章 “最小 API 项目中的依赖注入”](/books/minimal-apis/chapter-04)。
+> 如果你想了解更多关于依赖注入的信息，请转到 [第 4 章 “最小 API 项目中的依赖注入”](/books/master-minimal-apis/chapter-04)。
 
 为了将一个条目保存到数据库中，我们直接使用代表对象的实体的 `AddAsync` 方法。
 
@@ -159,7 +159,7 @@ app.MapGet("/icecreams", async (IcecreamDb db) =>
 确保你已经保存了项目中的所有更改并运行应用程序。
 一个新的浏览器窗口将打开，你可以导航到 `/swagger` URL：
 
-![Figure 7.1 – Swagger browser window](/assets/images/minimal-apis/Figure_7.01_B17902.jpg)
+![Figure 7.1 – Swagger browser window](/assets/images/master-minimal-apis/Figure_7.01_B17902.jpg)
 
 选择 `POST /icecreams` 按钮，然后点击 “**Try it out**”。
 
@@ -174,7 +174,7 @@ app.MapGet("/icecreams", async (IcecreamDb db) =>
 
 点击 “**Execute**”：
 
-![Figure 7.2 – Swagger response](/assets/images/minimal-apis/Figure_7.02_B17902.jpg)
+![Figure 7.2 – Swagger response](/assets/images/master-minimal-apis/Figure_7.02_B17902.jpg)
 
 现在我们的数据库中至少有一个条目，我们可以尝试其他端点来检索数据库中的所有条目。
 
@@ -202,7 +202,7 @@ app.MapGet("/icecreams/{id}", async (IcecreamDb db, int id) =>
 }
 ```
 这是响应的样子：
-![Figure 7.3 – Response result](/assets/images/minimal-apis/Figure_7.03_B17902.jpg)
+![Figure 7.3 – Response result](/assets/images/master-minimal-apis/Figure_7.03_B17902.jpg)
 
 
 要通过 ID 更新一个条目，我们可以创建一个新的 MapPut 端点，
@@ -507,4 +507,4 @@ app.MapGet("/icecreams", async (IIcecreamsRepository repository) =>
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

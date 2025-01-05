@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/preface
+permalink: /books/master-minimal-apis/preface
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 # 前言
@@ -114,4 +114,4 @@ $ dotnet new webapi -minimal -o Chapter01
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

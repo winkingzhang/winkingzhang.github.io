@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-10
+permalink: /books/master-minimal-apis/chapter-10
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -308,48 +308,48 @@ export default function () {
 
 2、 将 shell 移动到根文件夹，并在两个不同的 shell 中运行以下两个命令：
 ```shell
-dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll \
+dotnet ./MinimalAPI.Sample/bin/Release/net6.0/MinimalAPI.Sample.dll \
     --urls=https://localhost:7059/;http://localhost:7060/
-dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll \
+dotnet ./ControllerAPI.Sample/bin/Release/net6.0/ControllerAPI.Sample.dll \
     --urls="https://localhost:7149/;http://localhost:7150/"
 ```
 
 3、 现在，我们只需要为每个项目运行三个测试文件。
 
 - 这是用于基于控制器的 Web API 的测试：<br />
-`k6 run .\K6\Controllers\json.js --summary-export=.\K6\results\controller-json.json`
+`k6 run ./K6/Controllers/json.js --summary-export=./K6/results/controller-json.json`
 - 这是用于 Minimal API 的测试： <br />
-`k6 run .\K6\Minimal\json.js --summary-export=.\K6\results\minimal-json.json`
+`k6 run ./K6/Minimal/json.js --summary-export=./K6/results/minimal-json.json`
 
 以下是结果。
 
 对于传统开发模式下具有纯文本内容类型的测试，每秒处理的请求数为 1,547：
 
-![Figure 10.1 – The load test for a controller-based API and plain text](/assets/images/minimal-apis/Figure_10.1_B17902.jpg)
+![Figure 10.1 – The load test for a controller-based API and plain text](/assets/images/master-minimal-apis/Figure_10.1_B17902.jpg)
 
 对于传统开发模式下具有 JSON 内容类型的测试，每秒处理的请求数为 1,614：
 
-![Figure 10.2 – The load test for a controller-based API and JSON result](/assets/images/minimal-apis/Figure_10.2_B17902.jpg)
+![Figure 10.2 – The load test for a controller-based API and JSON result](/assets/images/master-minimal-apis/Figure_10.2_B17902.jpg)
 
 对于传统开发模式下具有 JSON 内容类型和模型验证的测试，每秒处理的请求数为 1,602：
 
-![Figure 10.3 – The load test for a controller-based API and validation payload](/assets/images/minimal-apis/Figure_10.3_B17902.jpg)
+![Figure 10.3 – The load test for a controller-based API and validation payload](/assets/images/master-minimal-apis/Figure_10.3_B17902.jpg)
 
 对于 Minimal API 开发模式下具有纯文本内容类型的测试，每秒处理的请求数为 2,285：
 
-![Figure 10.4 – The load test for a minimal API and plain text](/assets/images/minimal-apis/Figure_10.4_B17902.jpg)
+![Figure 10.4 – The load test for a minimal API and plain text](/assets/images/master-minimal-apis/Figure_10.4_B17902.jpg)
 
 对于 Minimal API 开发模式下具有 JSON 内容类型的测试，每秒处理的请求数为 2,030：
 
-![Figure 10.5 – The load test for a minimal API and JSON result](/assets/images/minimal-apis/Figure_10.5_B17902.jpg)
+![Figure 10.5 – The load test for a minimal API and JSON result](/assets/images/master-minimal-apis/Figure_10.5_B17902.jpg)
 
 对于 Minimal API 开发模式下具有 JSON 内容类型且无验证有效负载的测试，每秒处理的请求数为 2,070：
 
-![Figure 10.6 – The load test for a minimal API and no validation payload](/assets/images/minimal-apis/Figure_10.6_B17902.jpg)
+![Figure 10.6 – The load test for a minimal API and no validation payload](/assets/images/master-minimal-apis/Figure_10.6_B17902.jpg)
 
 在下图中，我们展示了三个测试功能的比较，报告了具有相同功能的处理请求数：
 
-![Figure 10.7 – The performance results](/assets/images/minimal-apis/Figure_10.7_B17902.jpg)
+![Figure 10.7 – The performance results](/assets/images/master-minimal-apis/Figure_10.7_B17902.jpg)
 
 正如我们可能预期的那样，Minimal APIs 比基于控制器的 Web APIs 快得多。
 
@@ -465,18 +465,18 @@ namespace DotNetBenchmarkRunners
 
 ```shell
 # Minimal API 应用程序
-dotnet .\MinimalAPI.Sample\bin\Release\net6.0\MinimalAPI.Sample.dll \
+dotnet ./MinimalAPI.Sample/bin/Release/net6.0/MinimalAPI.Sample.dll \
     --urls="https://localhost:7059/;http://localhost:7060/"
 
 # 基于控制器的应用程序
-dotnet .\ControllerAPI.Sample\bin\Release\net6.0\ControllerAPI.Sample.dll \
+dotnet ./ControllerAPI.Sample/bin/Release/net6.0/ControllerAPI.Sample.dll \
     --urls=https://localhost:7149/;http://localhost:7150/
 ```
 
 通过启动这些应用程序，将执行各种步骤，并提取带有我们在此报告的时间轴的总结报告：
 
 ```shell
-dotnet .\DotNetBenchmarkRunners\bin\Release\net6.0\DotNetBenchmarkRunners.dll \
+dotnet ./DotNetBenchmarkRunners/bin/Release/net6.0/DotNetBenchmarkRunners.dll \
     --filter *
 ```
 
@@ -508,4 +508,4 @@ Minimal APIs 并非仅为性能而设计，仅基于此进行评估是一个糟�
 随着 Minimal APIs 中省略的组件数量增加，两个框架之间的差距也会增大。
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

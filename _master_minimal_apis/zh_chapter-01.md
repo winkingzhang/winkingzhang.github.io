@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-01
+permalink: /books/master-minimal-apis/chapter-01
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 ## Minimal APIs 简介
@@ -126,14 +126,14 @@ $ dotnet --list-sdks
 按照以下步骤在 Visual Studio 2022 中创建新项目：
 
 1. 打开 Visual Studio 2022，在主屏幕上，单击创建新项目：
-![Figure_1.01_B17902.jpg](/assets/images/minimal-apis/Figure_1.01_B17902.jpg)
+![Figure_1.01_B17902.jpg](/assets/images/master-minimal-apis/Figure_1.01_B17902.jpg)
 2. 在下一个屏幕上，在窗口顶部的文本框中编写 API，然后选择名为 ASP.NET Core Web API 的模板：
-![Figure_1.02_B17902.jpg](/assets/images/minimal-apis/Figure_1.02_B17902.jpg)
+![Figure_1.02_B17902.jpg](/assets/images/master-minimal-apis/Figure_1.02_B17902.jpg)
 3. 接下来，在”配置新项目“屏幕上，插入新项目的名称，并选择新解决方案的根文件夹：
-![Figure_1.03_B17902.jpg](/assets/images/minimal-apis/Figure_1.03_B17902.jpg)
+![Figure_1.03_B17902.jpg](/assets/images/master-minimal-apis/Figure_1.03_B17902.jpg)
 4. 在以下”其他信息“屏幕上，确保从”框架“下拉列表中选择”.NET 6.0（长期支持）”。
 最重要的是，取消选中使用控制器（取消选中以使用 Minimal APIs）选项。
-![Figure_1.04_B17902.jpg](/assets/images/minimal-apis/Figure_1.04_B17902.jpg)
+![Figure_1.04_B17902.jpg](/assets/images/master-minimal-apis/Figure_1.04_B17902.jpg)
 5. 单击”创建“，几秒钟后，您将看到新的 `Minimal APIs` 项目的代码。
 
 现在我们将展示如何使用 Visual Studio Code 和 .NET CLI 创建相同的项目。
@@ -249,7 +249,7 @@ if (app.Environment.IsDevelopment())
 如代码分支判断条件，应用程序如果在开发环境中运行，则包含 Swagger 文档，否则就没有。
 
 > 提示<br/>
-> 后续会在 [第三章, 使用 Minimal APIs](/books/minimal-apis/chapter-03) 专门介绍 Swagger 相关话题
+> 后续会在 [第三章, 使用 Minimal APIs](/books/master-minimal-apis/chapter-03) 专门介绍 Swagger 相关话题
 
 正如前文提到在模板的中几行代码，它为我们揭晓了 .NET 6 Web 应用程序的另一个通用概念：环境 （Environment）。
 
@@ -297,8 +297,8 @@ app.MapPost("/weatherforecast", async (WeatherForecast model, IWeatherService re
 正如您在前面的简短代码中看到的那样，使用新的 `Minimal APIs` 模板添加新接口非常容易。
 以前，使用绑定参数编写新接口并使用依赖关系注入显得有些困难，尤其是对于新开发人员而言。
 
-> 提示<br/> 后续会在 [第二章，探索 Minimal APIs 及其优点](/books/minimal-apis/chapter-02) 探讨路由，
-> 在 [第四章，Minimal APIs 项目中的依赖注入](/books/minimal-apis/chapter-04) 探讨依赖注入
+> 提示<br/> 后续会在 [第二章，探索 Minimal APIs 及其优点](/books/master-minimal-apis/chapter-02) 探讨路由，
+> 在 [第四章，Minimal APIs 项目中的依赖注入](/books/master-minimal-apis/chapter-04) 探讨依赖注入
 
 
 ## 总结
@@ -311,4 +311,4 @@ app.MapPost("/weatherforecast", async (WeatherForecast model, IWeatherService re
 
 
 <br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

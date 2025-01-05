@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-05
+permalink: /books/master-minimal-apis/chapter-05
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -423,11 +423,11 @@ loggerCategory.LogDebug("I'm debug {Data}", p);
 如 `NLog`、`log4net` 和 `Serilog`，我们将在稍后讨论。
 
 我们展示了前面几行代码使用刚刚描述的两个提供程序的输出：
-![Figure_5.1 - AddJsonConsole output](/assets/images/minimal-apis/Figure_5.1_B17902.jpg)
+![Figure_5.1 - AddJsonConsole output](/assets/images/master-minimal-apis/Figure_5.1_B17902.jpg)
 
 上图显示了格式化为 JSON 的日志，与传统控制台日志相比有几个额外的细节。
 
-![Figure 5.2 – Default logging provider Console output](/assets/images/minimal-apis/Figure_5.2_B17902.jpg)
+![Figure 5.2 – Default logging provider Console output](/assets/images/master-minimal-apis/Figure_5.2_B17902.jpg)
 
 上图显示了默认日志记录提供程序 Console 的输出。
 
@@ -596,7 +596,7 @@ builder.Logging.AddFile(configuration =>
 ```
 
 输出如图 5.3 所示，我们可以在前五行中看到 `Microsoft` 日志类别（这是经典的应用程序启动信息）：
-![Figure 5.3 – File log provider output](/assets/images/minimal-apis/Figure_5.3_B17902.jpg)
+![Figure 5.3 – File log provider output](/assets/images/master-minimal-apis/Figure_5.3_B17902.jpg)
 
 然后，调用了我们在前面部分中报告的 Minimal API 的处理程序。
 如你所见，没有序列化异常数据或传递给日志记录器的数据。
@@ -653,7 +653,7 @@ Application Insights 将日志分组在特定的跟踪下。
 通过这种方式，如果我们处于微服务应用程序或多个相互协作的服务中，
 Application Insights 可以绑定各种 Minimal API 之间的调用。
 
-![Figure 5.4 – Application Insights with a standard log provider](/assets/images/minimal-apis/Figure_5.4_B17902.jpg)
+![Figure 5.4 – Application Insights with a standard log provider](/assets/images/master-minimal-apis/Figure_5.4_B17902.jpg)
 
 我们注意到日志记录框架的默认格式化程序不会序列化 `PayloadData` 对象，而只会写入对象的文本。
 
@@ -762,7 +762,7 @@ internal record Person(string Name, string Surname, DateTime BirthDate);
 
 最后，我们必须在 ApplicationInsights 服务中找到以 JSON 格式序列化的完整数据。
 
-![Figure 5.5 – Application Insights with structured data](/assets/images/minimal-apis/Figure_5.5_B17902.jpg)
+![Figure 5.5 – Application Insights with structured data](/assets/images/master-minimal-apis/Figure_5.5_B17902.jpg)
 
 
 ## 总结
@@ -784,4 +784,4 @@ internal record Person(string Name, string Surname, DateTime BirthDate);
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

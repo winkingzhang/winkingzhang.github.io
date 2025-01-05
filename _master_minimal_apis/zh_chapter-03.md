@@ -2,11 +2,11 @@
 title: "使用 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-03
+permalink: /books/master-minimal-apis/chapter-03
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -60,7 +60,7 @@ Swagger 是一个基于 OpenAPI 规范的工具，允许你使用 Web 应用程�
 
 我们了解到，在 .NET 世界中，我们所熟知的 Swagger 只不过是为所有公开基于 Web 的 API 的应用程序定义的一组规范：
 
-![Figure_3.1 - Visual Studio scaffold](/assets/images/minimal-apis/Figure_3.1_B17902.jpg)
+![Figure_3.1 - Visual Studio scaffold](/assets/images/master-minimal-apis/Figure_3.1_B17902.jpg)
 
 通过选择 " _启用 OpenAPI 支持_ "，Visual Studio 会添加一个名为 `Swashbuckle.AspNetCore` 的 NuGet 包，
 并自动在 **Program.cs** 文件中对其进行配置。
@@ -183,7 +183,7 @@ if (app.Environment.IsDevelopment())
 `UseSwaggerUI()` 方法自动配置放置 UI 和使用 OpenAPI 格式描述 API 的 JSON 文件的位置。
 
 这是现代桌面浏览器显示结果：
-![Figure_3.2 - The Swagger UI](/assets/images/minimal-apis/Figure_3.2_B17902.jpg)
+![Figure_3.2 - The Swagger UI](/assets/images/master-minimal-apis/Figure_3.2_B17902.jpg)
 
 我们立即可以看到 OpenAPI 契约信息已经放在了 `/swagger/v1/swagger.json` 路径下。
 
@@ -247,7 +247,7 @@ app.MapPost("/", (ResponseData data) => Results.Ok(data))
 
 如下这是 Swagger 的可视化结果；正如我之前预期的那样，标签和 `OperationId` 不在 Web 客户端显示：
 
-![Figure_3.3 - Swagger UI methods](/assets/images/minimal-apis/Figure_3.3_B17902.jpg)
+![Figure_3.3 - Swagger UI methods](/assets/images/master-minimal-apis/Figure_3.3_B17902.jpg)
 
 正因如此。从另一个角度来看，包含端点描述将是非常有用的。
 当然实现起来非常简单：只需在方法中插入 C# 注释（只需在方法中插入三个斜杠 ///）。
@@ -288,7 +288,7 @@ Swagger 不仅仅是我们习惯看到的 GUI。
 
 在前面的 Swagger UI 代码片段中，Swagger 提供了涉及的对象的示意图，包括进入各个端点的入站和从它们出站的出站。
 
-![Figure_3.4 - Input and output data schema](/assets/images/minimal-apis/Figure_3.4_B17902.jpg)
+![Figure_3.4 - Input and output data schema](/assets/images/master-minimal-apis/Figure_3.4_B17902.jpg)
 
 在第六章中，我们将学习如何处理这些对象以及如何验证和定义它们，探索验证和映射。
 
@@ -361,7 +361,7 @@ builder.Services.AddSwaggerGen(c =>
 以下是用户界面看到的结果；在端点中，只有对于特定的 `OperationId`，
 我们将有一个新的必填头部，该头部带有一个默认参数，在开发中不需要手动插入：
 
-![Figure 3.5 – API key section](/assets/images/minimal-apis/Figure_3.5_B17902.jpg)
+![Figure 3.5 – API key section](/assets/images/master-minimal-apis/Figure_3.5_B17902.jpg)
 
 此案例研究在我们需要设置 API key 且不希望在每次调用时都插入它时，对我们帮助很大。
 
@@ -389,11 +389,11 @@ CORS（跨源资源共享）是一种安全机制，通过该机制，如果HTTP
 
 最常见的场景是，SPA发布在与托管于 Minimal API 服务的不同 Web 地址上的 Web 服务器上。
 
-![Figure 3.6 – SPA and minimal API](/assets/images/minimal-apis/Figure_3.6_B17902.jpg)
+![Figure 3.6 – SPA and minimal API](/assets/images/master-minimal-apis/Figure_3.6_B17902.jpg)
 
 类似的场景是微服务之间需要相互通信，因为每个微服务将驻留在与其他服务不同的特定网络地址上。
 
-![Figure 3.7 – Microservices and minimal APIs](/assets/images/minimal-apis/Figure_3.7_B17902.jpg)
+![Figure 3.7 – Microservices and minimal APIs](/assets/images/master-minimal-apis/Figure_3.7_B17902.jpg)
 
 在所有这些情况下，显然都会遇到 CORS 问题。
 
@@ -409,20 +409,20 @@ HTTP 调用被执行并一直到达后端代码，后端代码正确执行。
 但包含正确数据的响应被浏览器阻止。
 这就是为什么当我们使用 Postman、Fiddler 或任何 HTTP 客户端执行调用时，响应能够正确到达我们的原因。
 
-![Figure 3.8 – CORS flow](/assets/images/minimal-apis/Figure_3.8_B17902.jpg)
+![Figure 3.8 – CORS flow](/assets/images/master-minimal-apis/Figure_3.8_B17902.jpg)
 
 在下面的图中，我们可以看到浏览器首先使用 OPTIONS 方法进行调用，后端以 204 状态码正确响应：
 
-![Figure 3.9 – First request for the CORS call (204 No Content result)](/assets/images/minimal-apis/Figure_3.9_B17902.jpg)
+![Figure 3.9 – First request for the CORS call (204 No Content result)](/assets/images/master-minimal-apis/Figure_3.9_B17902.jpg)
 
 随后在浏览器发起的第二个调用是，这里就报错了；
 在 `Referrer Policy` 信息里显示 `strict-origin-when-cross-origin`，以表示浏览器拒绝从服务器后端接收数据
 
-![Figure 3.10 – Second request for the CORS call (blocked by the browser)](/assets/images/minimal-apis/Figure_3.10_B17902.jpg)
+![Figure 3.10 – Second request for the CORS call (blocked by the browser)](/assets/images/master-minimal-apis/Figure_3.10_B17902.jpg)
 
 当 CORS 启用时，在对 OPTIONS 方法调用的响应中，会插入三个具有后端愿意遵守的特征的头：
 
-![Figure 3.11 – Request for CORS call (with CORS enabled)](/assets/images/minimal-apis/Figure_3.11_B17902.jpg)
+![Figure 3.11 – Request for CORS call (with CORS enabled)](/assets/images/master-minimal-apis/Figure_3.11_B17902.jpg)
 
 在这种情况下，我们可以看到添加了三个头，
 它们定义了 `Access-Control-Allow-Headers`、`Access-Control-Allow-Methods` 和 `Access-Control-Allow-Origin`。
@@ -466,7 +466,7 @@ HTTP 调用被执行并一直到达后端代码，后端代码正确执行。
 安装后，需要使用以下命令启动 SPA：
 
 ```bash
-$ livereloadserver "{BasePath}\Chapter03\2-CorsSample\Frontend"
+$ livereloadserver "{BasePath}/Chapter03/2-CorsSample/Frontend"
 ```
 
 这里，BasePath 是你要下载 GitHub 上示例的文件夹。
@@ -474,7 +474,7 @@ $ livereloadserver "{BasePath}\Chapter03\2-CorsSample\Frontend"
 然后，就得启动应用程序后端，可以通过 Visual Studio、Visual Studio Code 或使用以下命令通过 .NET CLI 启动：
 
 ```bash
-$ dotnet run .\Backend\CorsSample.csproj
+$ dotnet run ./Backend/CorsSample.csproj
 ```
 
 我们已经了解了如何启动一个突出 CORS 问题的示例；
@@ -953,7 +953,7 @@ Microsoft.Extensions.Options.OptionsValidationException:
 在 **“连接字符串”** 部分，你可以插入通常插入在 `appsettings.json` 文件中的连接字符串。
 在本节中，除了文本字符串外，还需要设置连接类型，正如我们在 _“.NET 6 中的配置”_ 部分中看到的那样。
 
-![Figure 3.12 – Azure App Service Application settings](/assets/images/minimal-apis/Figure_3.12_B17902.jpg)
+![Figure 3.12 – Azure App Service Application settings](/assets/images/master-minimal-apis/Figure_3.12_B17902.jpg)
 
 ##### 插入一个对象
 
@@ -1091,7 +1091,7 @@ GetConnectionString(“SqlConnection”)
 这个中间件不能从 ASP.NET 管道中删除，并且仅在开发环境中工作 
 ([https://docs.microsoft.com/aspnet/core/fundamentals/error-handling](https://docs.microsoft.com/aspnet/core/fundamentals/error-handling)).
 
-![Figure 3.13 – Minimal APIs pipeline, ExceptionHandler](/assets/images/minimal-apis/Figure_3.13_B17902.jpg)
+![Figure 3.13 – Minimal APIs pipeline, ExceptionHandler](/assets/images/master-minimal-apis/Figure_3.13_B17902.jpg)
 
 如果在我们的代码中引发异常，在应用层捕获它们的唯一方法是通过在将响应发送到客户端之前激活的中间件。
 
@@ -1308,4 +1308,4 @@ public class OutOfCreditProblemDetails : ProblemDetails
 它将帮助我们更好地管理分散在各个层中的应用程序代码。
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-04
+permalink: /books/master-minimal-apis/chapter-04
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -23,7 +23,7 @@ sidebar:
 ## 技术要求
 
 要跟上本章中的叙述，你需要创建一个 ASP.NET Core 6.0 Web API 应用程序。
-你可以参考 [第 2 章 “探索最小 API 及其优势”](/books/minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
+你可以参考 [第 2 章 “探索最小 API 及其优势”](/books/master-minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
 
 本章中的所有代码示例都可以在本书的 GitHub 存储库中找到，地址为：<br/>
 [https://github.com/PacktPublishing/Minimal-APIs-in-ASP.NET-Core6/tree/main/Chapter04](https://github.com/PacktPublishing/Minimal-APIs-in-ASP.NET-Core6/tree/main/Chapter04)
@@ -291,4 +291,4 @@ using (var scope = app.Services.CreateScope())
 在下一章中，我们将关注现代应用程序的另一个重要层，并讨论如何在 Minimal API 项目中实现日志记录策略。
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

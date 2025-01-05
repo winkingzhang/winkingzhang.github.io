@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-09
+permalink: /books/master-minimal-apis/chapter-09
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -29,7 +29,7 @@ sidebar:
 ## 技术要求
 
 要遵循本章中的描述，需创建一个 ASP.NET Core 6.0 Web API 应用程序。
-参考 [第 1 章 “Minimal API 简介”](/books/minimal-apis/chapter-01) 中的技术要求部分了解创建方法。
+参考 [第 1 章 “Minimal API 简介”](/books/master-minimal-apis/chapter-01) 中的技术要求部分了解创建方法。
 
 若使用控制台、shell 或 Bash 终端创建 API，请记住将工作目录更改为当前章节编号（Chapter09）。
 
@@ -193,11 +193,11 @@ app.MapGet("/culture", () =>
 
 在上述处理程序中，只是返回线程的文化。此方法无参数，但添加上述过滤器后，Swagger UI 显示如下：
 
-![Figure 9.1 – The Accept-Language header added to Swagger](/assets/images/minimal-apis/Figure_9.1_B17902.jpg)
+![Figure 9.1 – The Accept-Language header added to Swagger](/assets/images/master-minimal-apis/Figure_9.1_B17902.jpg)
 
 可点击 “**Try it out**” 按钮从列表中选择值，再点击 “**Execute**” 调用端点：
 
-![Figure 9.2 – The result of the execution with the Accept-Language HTTP header](/assets/images/minimal-apis/Figure_9.2_B17902.jpg)
+![Figure 9.2 – The result of the execution with the Accept-Language HTTP header](/assets/images/master-minimal-apis/Figure_9.2_B17902.jpg)
 
 这是选择意大利语作为语言请求的结果：Swagger 添加了 `Accept-Language` HTTP 头，
 ASP.NET Core 用其设置当前文化，最终在路由处理程序中获取并返回文化显示名称。
@@ -230,14 +230,14 @@ Minimal API 现在支持全球化，能根据请求切换文化，这意味着�
 
 2、 在 “**添加新项**” 对话框窗口中搜索 “`Resources`”，选择相应模板并命名文件，如 `Messages.resx`：
 
-![Figure 9.3 – Adding a resource file to the project](/assets/images/minimal-apis/Figure_9.3_B17902.jpg)
+![Figure 9.3 – Adding a resource file to the project](/assets/images/master-minimal-apis/Figure_9.3_B17902.jpg)
 
 新文件会立即在 Visual Studio 编辑器中打开。
 
 3、 在新文件中，首先从 “**访问修饰符**” 选项中选择 “**Internal**” 或 “**Public**”（根据所需代码可见性），
 以便 Visual Studio 创建 C# 文件公开访问资源的属性：
 
-![Figure 9.4 – Changing the Access Modifier of the resource file](/assets/images/minimal-apis/Figure_9.4_B17902.jpg)
+![Figure 9.4 – Changing the Access Modifier of the resource file](/assets/images/master-minimal-apis/Figure_9.4_B17902.jpg)
 
 更改此值后，Visual Studio 会向项目添加 `Messages.Designer.cs` 文件，并自动创建与资源文件中插入的字符串对应的属性。
 
@@ -320,7 +320,7 @@ app.MapGet("/hello", (string name) =>
 
 ## 在验证框架中集成本地化
 
-在 [第 6 章 “探索验证和映射”](/books/minimal-apis/chapter-06) 中，讨论了如何将验证集成到 Minimal API 项目中，
+在 [第 6 章 “探索验证和映射”](/books/master-minimal-apis/chapter-06) 中，讨论了如何将验证集成到 Minimal API 项目中，
 学习了使用 `MiniValidation` 库而非 `FluentValidation` 验证模型并向调用者提供验证消息，
 还提到 `FluentValidation` 已默认提供标准错误消息的翻译。
 
@@ -603,9 +603,9 @@ ASP.NET Core 提供了创建能够响应用户所在文化、并依据请求语�
 我们还探讨了在处理不同时区时可能出现的与全球化相关的问题，并展示了如何通过使用统一的协调世界时（UTC）日期时间格式来解决这些问题，
 如此一来，无论客户端处于何种地理位置、属于哪个时区，我们的 API 都能够无缝运行。
 
-在 [第 10 章 “评估和衡量 Minimal API 的性能”](/books/minimal-apis/chapter-10) 中，我们将探讨创建 Minimal API 的原因，
+在 [第 10 章 “评估和衡量 Minimal API 的性能”](/books/master-minimal-apis/chapter-10) 中，我们将探讨创建 Minimal API 的原因，
 并分析与经典的基于控制器的方法相比，使用 Minimal API 在性能方面的优势。
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

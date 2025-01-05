@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-02
+permalink: /books/master-minimal-apis/chapter-02
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 ## 探索 Minimal APIs 及其优点
@@ -189,7 +189,7 @@ ASP.NET Core `Minimal APIs` 支持以下绑定源：
 - Http 正文（仅 JSON，默认支持的唯一格式）
 - 服务提供者（依赖注入）
 
-我们将在 [第 4 章 实施依赖注入](/books/minimal-apis/chapter-04) 中详细讨论依赖注入。
+我们将在 [第 4 章 实施依赖注入](/books/master-minimal-apis/chapter-04) 中详细讨论依赖注入。
 
 正如我们将在本章后面看到的那样，如有必要，我们可以自定义为特定输入执行绑定的方式。
 不幸的是，在当前版本中，`Minimal APIs` 本身不支持从 **Form** 进行绑定，这意味着，也不支持 **IFormFile**。
@@ -730,4 +730,4 @@ ASP.NET Core `Minimal APIs` 代表了一种在 .NET 世界中编写 HTTP API 的
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

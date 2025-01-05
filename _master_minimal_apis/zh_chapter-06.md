@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-06
+permalink: /books/master-minimal-apis/chapter-06
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -22,7 +22,7 @@ sidebar:
 ### 技术要求
 
 要遵循本章中的描述，你需要创建一个 ASP.NET Core 6.0 Web API 应用程序。
-请参考 [第 2 章 “探索最小 API 及其优势”](/books/minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
+请参考 [第 2 章 “探索最小 API 及其优势”](/books/master-minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
 
 如果你使用控制台、shell 或 Bash 终端创建 API，请记住将工作目录更改为当前章节编号（Chapter06）。
 
@@ -284,7 +284,7 @@ RuleFor(p => p.FirstName)
     .WithMessage("You must enter a first name.");
 ```
 
-我们将在 [第 9 章 “利用全球化和本地化”](/books/minimal-apis/chapter-09) 中更详细地讨论本地化。
+我们将在 [第 9 章 “利用全球化和本地化”](/books/master-minimal-apis/chapter-09) 中更详细地讨论本地化。
 
 这只是一个关于如何使用 `FluentValidation` 定义验证规则并在 Minimal API 中使用它们的快速示例。
 这个库允许许多更复杂的场景，在官方文档（[https://fluentvalidation.net](https://fluentvalidation.net)）中有全面的描述。
@@ -308,12 +308,12 @@ app.MapPost("/people", (Person person) =>
 
 通过这种方式，将为 Swagger 添加一个新的 `400 Bad Request` 状态码的响应类型，如下所示：
 
-![Figure 6.1 – The validation problem response added to Swagger](/assets/images/minimal-apis/Figure_6.1_B17902.jpg)
+![Figure 6.1 – The validation problem response added to Swagger](/assets/images/master-minimal-apis/Figure_6.1_B17902.jpg)
 
 此外，Swagger UI 底部显示的 JSON 模式可以显示相应模型的规则。
 使用数据注释定义验证规则的一个好处是它们会自动反映在这些模式中：
 
-![Figure 6.2 – The validation rules for the Person object in Swagger](/assets/images/minimal-apis/Figure_6.2_B17902.jpg)
+![Figure 6.2 – The validation rules for the Person object in Swagger](/assets/images/master-minimal-apis/Figure_6.2_B17902.jpg)
 
 不幸的是，使用 `FluentValidation` 定义的验证规则不会自动显示在 Swagger 的 JSON 模式中。
 我们可以通过使用 `MicroElements.Swashbuckle.FluentValidation` 克服此限制，这是一个小库，
@@ -544,4 +544,4 @@ Minimal API 不提供执行这些任务的内置方法，所以了解如何添�
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)

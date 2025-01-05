@@ -2,11 +2,11 @@
 title: "掌握 Minimal APIs 技术"
 excerpt: "使用 .NET 和 C# 编译、测试和快速开发 web api 原型应用"
 sitemap: false
-permalink: /books/minimal-apis/chapter-08
+permalink: /books/master-minimal-apis/chapter-08
 layout: single
 classes: wide
 sidebar:
-  nav: "minimal_apis"
+  nav: "master_minimal_apis"
 ---
 
 
@@ -30,7 +30,7 @@ sidebar:
 ## 技术要求
 
 要遵循本章中的示例，你需要创建一个 ASP.NET Core 6.0 Web API 应用程序。
-请参考 [第 2 章 “探索最小 API 及其优势”](/books/minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
+请参考 [第 2 章 “探索最小 API 及其优势”](/books/master-minimal-apis/chapter-02) 中的技术要求部分，了解如何创建。
 
 如果你使用控制台、shell 或 Bash 终端创建 API，请记住将工作目录更改为当前章节编号（Chapter08）。
 
@@ -123,7 +123,7 @@ app.MapGet("/api/method-protected", () =>
 
 如果我们现在尝试使用 Swagger 调用这些方法中的每一个，我们将得到一个 `401 Unauthorized` 的响应，如下所示：
 
-![Figure 8.1 – Unauthorized response in Swagger](/assets/images/minimal-apis/Figure_8.1_B17902.jpg)
+![Figure 8.1 – Unauthorized response in Swagger](/assets/images/master-minimal-apis/Figure_8.1_B17902.jpg)
 
 注意消息中包含一个头，指示预期的身份认证方案是 `Bearer`，正如我们在代码中声明的那样。
 
@@ -220,7 +220,7 @@ JWT 承载令牌的创建涉及许多不同的概念，但通过前面的代码�
 所以，现在我们可以尝试在 Swagger 中使用登录端点。
 在插入正确的用户名和密码并点击 “**Execute**” 按钮后，我们将得到以下响应：
 
-![Figure 8.2 – The JWT bearer as a result of the login request in Swagger](/assets/images/minimal-apis/Figure_8.2_B17902.jpg)
+![Figure 8.2 – The JWT bearer as a result of the login request in Swagger](/assets/images/master-minimal-apis/Figure_8.2_B17902.jpg)
 
 我们可以复制令牌值并将其插入到 [https://jwt.ms](https://jwt.ms) 网站的 URL 中，以查看它包含的内容。
 我们将得到类似以下的内容：
@@ -341,11 +341,11 @@ builder.Services.AddSwaggerGen(options =>
 
 在添加前面的代码后，如果我们现在运行我们的应用程序，Swagger UI 将包含一些新内容。
 
-![Figure 8.3 – Swagger showing the authentication features](/assets/images/minimal-apis/Figure_8.3_B17902.jpg)
+![Figure 8.3 – Swagger showing the authentication features](/assets/images/master-minimal-apis/Figure_8.3_B17902.jpg)
 
 点击 “**Authorize**” 按钮或端点右侧的任何挂锁图标，将出现以下窗口，允许我们插入承载令牌：
 
-![Figure 8.4 – The window that allows setting the bearer token](/assets/images/minimal-apis/Figure_8.4_B17902.jpg)
+![Figure 8.4 – The window that allows setting the bearer token](/assets/images/master-minimal-apis/Figure_8.4_B17902.jpg)
 
 最后要做的是在 “**Value**” 文本框中插入令牌并点击 “**Authorize**” 确认。
 从现在开始，指定的承载令牌将与使用 Swagger 发出的每个请求一起发送。
@@ -364,7 +364,7 @@ builder.Services.AddSwaggerGen(options =>
 因为在这种情况下，签名将不是预期的，如前所述。同样，如果令牌形式上有效但已过期，我们将得到一个 **401** 响应。
 
 由于我们已经定义了只有经过身份认证的用户才能访问的端点，一个常见的需求是在相应的路由处理程序中访问用户信息。
-在 [第 2 章 “探索 Minimal API 及其优势”](/books/minimal-apis/chapter-02) 中，
+在 [第 2 章 “探索 Minimal API 及其优势”](/books/master-minimal-apis/chapter-02) 中，
 我们展示了 Minimal API 提供了一个特殊绑定，直接提供一个 `ClaimsPrincipal` 对象来表示已登录用户：
 
 ```csharp
@@ -731,4 +731,4 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
 
 
 <br/><br/><br/><br/>
-&gt;  [返回扉页](/books/minimal-apis)
+&gt;  [返回扉页](/books/master-minimal-apis)
