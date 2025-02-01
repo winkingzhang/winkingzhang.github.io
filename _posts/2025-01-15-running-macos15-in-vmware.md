@@ -135,7 +135,7 @@ $ hdiutil detach -force /Volumes/Install\ macOS\ Sonoma
 "disk6" ejected.
 
 $ ls -al /tmp/MacOS.dmg
--rw-r--r--@ 1 wenqing  wheel  16777216000 15 Oct 21:54 /tmp/MacOS.dmg
+-rw-r--r--@ 1 wenqing  wheel  16777216000 15 Jan 20:26 /tmp/MacOS.dmg
 
 $ hdiutil convert /tmp/MacOS.dmg -format UDTO -o /tmp/MacOS-Sonoma-14.7.cdr
 Reading Driver Descriptor Map (DDM : 0)…
