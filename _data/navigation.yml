@@ -45,4 +45,6 @@ master_minimal_apis:
 modern_angular:
   - title: "扉页"
     url: /books/modern-angular/
+  - title: "前言"
+    url: /books/modern-angular/preface
 
