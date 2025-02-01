@@ -6,7 +6,7 @@ permalink: /books/modern-angular/preface
 layout: single
 classes: wide
 sidebar:
-  nav: "master_minimal_apis"
+  nav: "modern_angular"
 ---
 
 ## 前言
