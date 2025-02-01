@@ -209,6 +209,9 @@ collections:
   master_minimal_apis:
     output: true
     permalink: /books/:collection/:path
+  modern_angular:
+    output: true
+    permalink: /books/:collection/:path
 
 # Defaults
 defaults:

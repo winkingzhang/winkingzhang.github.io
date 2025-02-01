@@ -41,3 +41,8 @@ master_minimal_apis:
       - title: "评估性能并进行基准测试"
         url: /books/master-minimal-apis/chapter-10
 
+# Book Modern Angular
+modern_angular:
+  - title: "扉页"
+    url: /books/modern-angular/
+
