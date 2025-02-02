@@ -28,7 +28,7 @@ sidebar:
 基于这一目标，`Angular` 团队在最近的版本（从 v13 和 v14 开始）中发布了多项重要更新，
 这些更新成为了关键突破，使 `Angular` 走上了一条近乎革命性的变革之路。
 在本书付梓之时，`Angular` v19 将作为最新版本发布，它集成了一系列用于解决各种问题的现代工具。
-我们将深入探讨近期版本（v12 - v18）中的所有功能，无论其大小，并通过示例、实践指南和练习进行详细讲解。
+我们将深入探讨近期版本（v12-v18）中的所有功能，无论其大小，并通过示例、实践指南和练习进行详细讲解。
 
 ### 1.1 学习预期
 
@@ -41,7 +41,7 @@ sidebar:
 
 * **`Angular` 新用户**：开发者可能来自其他框架，或者刚刚开始使用 `Angular`，希望更详细地了解其最新特性（前提是具备一定的基础知识）。
 * **经验丰富的 `Angular` 开发者**：即使是最资深的 `Angular` 开发者也能从本书中获益。
-  本书全面概述了 `Angular` v12 - v18 中引入的所有新特性和变化。
+  本书全面概述了 `Angular` v12-v18 中引入的所有新特性和变化。
 * **使用旧版本 `Angular` 的开发者**：本书可以帮助那些仍在使用旧版本 `Angular` 的开发者理解升级到最新版本的好处，
   以及如何快速、顺利地完成升级。除了介绍近期版本中的新特性和变化，我们还将讨论其他相关主题，如反向移植的更改。
 
@@ -339,7 +339,7 @@ export const appConfig: ApplicationConfig = {
 那么，如果我们没有那个文件，我们的应用程序是如何初始化和启动的呢？嗯，这个逻辑完全转移到了 `main.ts` 文件中。
 
 ```typescript
-import { bootstrapApplication } from '@angular/platform - browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
@@ -500,7 +500,7 @@ bootstrapApplication(AppComponent, appConfig)
 都显著影响了我们编写单元测试的方式，带来了更快的编写体验，并且减少了模拟数据所花费的时间。
 在第 8 章，我们将深入了解单元测试如何推动现代 `Angular` 开发。
 
-##### 服务器端渲染水合（Server - Side Rendering Hydration）
+##### 服务器端渲染水合（Server-Side Rendering Hydration）
 
 长期以来，服务器端一直是 Angular 的薄弱环节之一，仅支持最基本的页面全量渲染，
 但最近的发展增添了人们期待已久的功能，即全量水合（full hydration）。
