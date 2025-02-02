@@ -49,4 +49,6 @@ modern_angular:
     url: /books/modern-angular/preface
   - title: "欢迎来到现代 Angular 的世界"
     url: /books/modern-angular/chapter-01
+  - title: "独立的未来"
+    url: /books/modern-angular/chapter-02
 
