@@ -94,6 +94,11 @@ sidebar:
 本书示例的完整代码可从曼宁出版社（Manning）网站 [https://www.manning.com/books/modern-angular](https://www.manning.com/books/modern-angular) 
 以及 GitHub 上的 [https://github.com/Armenvardanyan95/modern-angular-hrms](https://www.manning.com/books/modern-angular) 下载。
 
+## 关于作者
+
+阿尔缅・瓦尔达尼扬（**Armen Vardanyan**）是 `Angular` 领域的谷歌开发者专家，也是一名拥有八年经验的前端团队负责人。
+他撰写有关 `Angular`、`TypeScript`、`RxJS`、`NgRx` 及其他相关技术的文章，有时也会在会议上作为演讲者亮相。
+
 
 <br/><br/><br/><br/>
 &gt;  [返回扉页](/books/modern-angular)
