@@ -78,6 +78,8 @@ feature_row5:
     btn_class: "btn--primary"
 ---
 
+[English Version](/resume_en)
+
 {% include feature_row id="intro" type="center" %}
 
 ## 工作经历
@@ -86,8 +88,8 @@ feature_row5:
 
 
 ## 专业能力
--	熟练掌握C#语言（18年）；
--	熟练掌握JavaScript语言（8年）、TypeScript（5年），全栈开发；
+-	熟练掌握C#语言（20年）；
+-	熟练掌握JavaScript语言（10年）、TypeScript（8年），全栈开发；
 -	基本掌握C++语言， 能够使用MFC，UWP，QT等流行UI框架进行桌面和移动应用开发；
 -	基本掌握Java语言， 能使用Spring进行简单Web应用开发；
 -	熟练掌握jQuery/Knockout.js/AngularJS/Angular/React进行前端开发；
